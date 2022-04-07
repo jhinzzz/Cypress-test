@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-const Mock = require("mockjs");
+import { mock } from "mockjs";
 
 /*
     US LLT product needs to be updated before 05/07/2022
@@ -12,7 +12,7 @@ let llt_subscribe_res = false;
 let llt_close_res = false;
 let llt_text_res = false;
 let llt_notify_res = false;
-let email = Mock.mock("@email");
+let email = mock("@email");
 /*---------------------------前置数据定义---------------------------*/
 let label; //label设置
 const d = new Date();
@@ -24,7 +24,7 @@ describe("US test", () => {
     expect(date, "today is no need to update product").to.not.equal("2022/6/5"); //先判断是否需要更新产品
     cy.request(
       "GET",
-      Cypress.env("US_API") + "v2/products/seb-bed"  //更新产品直接切换后面的url参数即可
+      Cypress.env("US_API") + "/v2" + Cypress.env("US_LLT")  //更新产品直接切换后面的url参数即可
     ).then((response) => {
       label = response.body.variants[1].sku;
       label += " | ";
@@ -34,7 +34,7 @@ describe("US test", () => {
 
   /*---------------------------测试主体---------------------------*/
   it("LLT test", () => {
-    cy.visit(Cypress.env("US_HPG") + "products/seb-bed?bed_frame_size=king&material=dark_raphite%28seb%29");
+    cy.visit(Cypress.env("US_HPG") + Cypress.env("US_LLT"));
 
     cy.get('[data-selenium="add_to_cart"]').click(); //触发LLT_popup_dispaly
     cy.get(".ZKM6kW__button")

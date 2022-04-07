@@ -43,7 +43,7 @@ describe("test PDP GTM", () => {
   /*---------------------------前置数据设置---------------------------*/
   before("product imformation prepared", () => {
     cy
-      .request("GET", Cypress.env("SG_API") + "v2/" + Cypress.env("SG_BUN"))
+      .request("GET", Cypress.env("SG_API") + "/v2" + Cypress.env("SG_BUN"))
       .then((response) => {
         product_sku = response.body.variants[0].sku;
         product_name = response.body.variants[0].name;

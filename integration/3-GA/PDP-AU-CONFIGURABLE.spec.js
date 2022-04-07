@@ -44,7 +44,7 @@ describe("test PDP GTM", () => {
   /*---------------------------前置数据设置---------------------------*/
   before("product imformation prepared", () => {
     cy
-      .request("GET", Cypress.env("AU_API") + "v2/" + Cypress.env("AU_CON"))
+      .request("GET", Cypress.env("AU_API") + "/v2" + Cypress.env("AU_CON"))
       .then((response) => {
         product_sku = response.body.variants[1].sku;  //修改configurable后需要修改
         product_name = response.body.variants[1].name;  //修改configurable后需要修改

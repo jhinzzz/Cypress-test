@@ -24,7 +24,7 @@ describe("AU test", () => {
     expect(date, "today is no need to update product").to.not.equal("2022/8/10"); //先判断是否需要更新产品
     cy.request(
       "GET",
-      Cypress.env("AU_API") + "v2/products/jaxon-round-coffee-table"  //更新产品直接切换后面的url参数即可
+      Cypress.env("AU_API") + "/v2" +Cypress.env("AU_LLT")  //更新产品直接切换后面的url参数即可
     ).then((response) => {
       label = response.body.variants[0].sku;
       label += " | ";
@@ -34,7 +34,7 @@ describe("AU test", () => {
 
   /*---------------------------测试主体---------------------------*/
   it("LLT test", () => {
-    cy.visit(Cypress.env("AU_HPG") + "products/jaxon-round-coffee-table");
+    cy.visit(Cypress.env("AU_HPG") + Cypress.env("AU_LLT"));
 
     cy.get('[data-selenium="add_to_cart"]').click(); //触发LLT_popup_dispaly
     cy.get(".ZKM6kW__button")
