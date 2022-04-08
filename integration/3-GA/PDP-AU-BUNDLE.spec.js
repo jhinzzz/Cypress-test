@@ -52,6 +52,11 @@ describe("test PDP GTM", () => {
         product_label = product_sku + " | " + product_name;
         product_length = response.body.bundle_options[0].option_types[0].values[1].presentation
         product_opt_name = response.body.bundle_options[0].option_types[0].name
+        response.body.taxons.find((taxon) => {
+          if (taxon.ancestors.includes("Collections")) {
+            product_brand = taxon.name;
+          }
+        });
         response.body.product_properties.product_details.find((detail) => {
           if (detail.explanation) {
             product_detail_value = detail.value;
@@ -68,7 +73,7 @@ describe("test PDP GTM", () => {
         })
       })
     });
-
+  
   /*---------------------------测试主体---------------------------*/
   it("test AU bundle", () => {
 
@@ -138,7 +143,7 @@ describe("test PDP GTM", () => {
         if (dl.event === "productDetail") {
           dl.ecommerce.detail.products.some((sku) => {
             if (
-              sku.brand === "Vincent Collection" &&
+              sku.brand === product_brand &&
               sku.id === product_sku &&
               sku.name === product_name &&
               sku.category === product_category &&

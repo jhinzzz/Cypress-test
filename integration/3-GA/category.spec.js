@@ -3,7 +3,7 @@
 describe('test SG category', ()=>{
 
     it('test catgory', ()=>{
-        //cy.visit('https://www.castlery.com/sg/?&dyApiPreview=64279e3c7151aa8f796aad476b6a5c08')
+        cy.visit('https://www.castlery.com/sg/?&dyApiPreview=64279e3c7151aa8f796aad476b6a5c08')
 
         cy.get('.QP9WMA__mainLinks > :nth-child(1) > [data-label="Living Room"]').click()  // 触发link_click
         cy.get('.sk-panel__content > :nth-child(1) > :nth-child(1)').contains('All Living Room').click({force:true})  // 触发category_filter
