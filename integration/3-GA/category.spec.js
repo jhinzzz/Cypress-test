@@ -5,10 +5,10 @@ describe('test SG category', ()=>{
     it('test catgory', ()=>{
         cy.visit('https://www.castlery.com/sg/?&dyApiPreview=64279e3c7151aa8f796aad476b6a5c08')
 
-        cy.get('.QP9WMA__mainLinks > :nth-child(1) > [data-label="Living Room"]').click()  // 触发link_click
-        cy.get('.sk-panel__content > :nth-child(1) > :nth-child(1)').contains('All Living Room').click({force:true})  // 触发category_filter
-        cy.get('.oKSUwO__select > .qL97UN').contains('Recommendation').click()
-        cy.get('.oKSUwO__select > .qL97UN > .qL97UN__options > :nth-child(2) > div').click()  // 触发sort_filter
+        cy.get('a[data-label="Living Room"]').contains('Living Room').click()  // 触发link_click
+        cy.get('div.text').contains('All Living Room').click({force:true})  // 触发category_filter
+        cy.get('span').contains('Recommendation').click()
+        cy.get('a').contains('Fast Dispatch').click()  // 触发sort_filter
 
         cy.window().then((win)=>{
             //  测试link_click
