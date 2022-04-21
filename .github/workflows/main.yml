@@ -11,45 +11,43 @@ on:
 
 jobs:
   # 缓存环境
-  Cypress-install:
-    runs-on: ubuntu-latest
-    container: cypress/browsers:node16.14.2-slim-chrome100-ff99-edge
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+  # Cypress-install:
+  #   runs-on: ubuntu-latest
+  #   container: cypress/browsers:node16.14.2-slim-chrome100-ff99-edge
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v3
 
-      - name: Cypress install
-        uses: cypress-io/github-action@v3
-        with:
-          runTests: false
-      # 保存缓存
-      - name: Save build folder
-        uses: actions/upload-artifact@v3
-        with:
-          name: build
-          if-no-files-found: error
-          path: build
+  #     - name: Cypress install
+  #       uses: cypress-io/github-action@v3.0.3
+  #       with:
+  #         runTests: false
+  #     # 保存缓存
+  #     - name: Save build folder
+  #       uses: actions/upload-artifact@v3
+  #       with:
+  #         name: build
+  #         if-no-files-found: error
+  #         path: build
 
 
   Cypress-run:
     runs-on: ubuntu-latest
     # cypress browser docker
     container: cypress/browsers:node16.14.2-slim-chrome100-ff99-edge
-    needs: Cypress-install
-    # strategy:
-    #   fail-fast: false
+    # needs: Cypress-install
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      # 下载缓存
-      - name: Download the build folders
-        uses: actions/download-artifact@v3
-        with:
-          name: build
-          path: build
+      # # 下载缓存
+      # - name: Download the build folders
+      #   uses: actions/download-artifact@v3
+      #   with:
+      #     name: build
+      #     path: build
       # 运行cypress
       - name: Cypress-run
-        uses: cypress-io/github-action@v3
+        uses: cypress-io/github-action@v3.0.3
         with:
           browser: chrome
           record: true
