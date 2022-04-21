@@ -15,10 +15,9 @@ on:
 
 jobs:
   # 缓存环境
-  Cypres-install:
+  Cypress-install:
     runs-on: ubuntu-latest
     container: cypress/browsers:node16.14.2-slim-chrome100-ff99-edge
-
     steps:
       - name: Checkout
       - uses: actions/checkout@v3
@@ -27,7 +26,6 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           runTests: false
-
       # 保存缓存
       - name: Save build folder
         uses: actions/upload-artifact@v3
