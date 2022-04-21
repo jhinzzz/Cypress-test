@@ -1,11 +1,11 @@
 name: GTM test
 
 on:
-  push:
-    branches: [ master ]
+  # push:
+  #   branches: [ master ]
   # 定时任务
-  schedule:
-    - cron: '0 0 * * *'
+  # schedule:
+  #   - cron: '0 0 * * *'
   # 手动触发
   workflow_dispatch:
 
@@ -53,6 +53,7 @@ jobs:
           record: true
           # group: "UI - Chrome"
           spec: integration/3-GA/*
+          group: Actions test
         env:
           CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
           CYRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
