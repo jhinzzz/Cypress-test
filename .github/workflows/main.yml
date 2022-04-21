@@ -8,7 +8,7 @@ on:
   push:
     branches: [ master ]
   schedule:
-    -cron:
+    - cron:
       - on: '0 0 * * *'
   workflow dispatch:
 
