@@ -15,46 +15,47 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  # Cypres-install:
-  #   runs-on: ubuntu-latest
-  #   container: cypress/browsers:node16.14.2-slim-chrome100-ff99-edge
-  #   env:
-  #   # Steps represent a sequence of tasks that will be executed as part of the job
-  #   steps:
-  #     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-  #     - name: Checkout
-  #     - uses: actions/checkout@v3
+  # 构建
+  Cypres-install:
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node16.14.2-slim-chrome100-ff99-edge
+    env:
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout
+      - uses: actions/checkout@v3
 
-  #     # 构建缓存
-  #     - name: Save build folder
-  #       uses: actions/upload-artifact@v3
-  #       with:
-  #         name: build
-  #         if-no-files-found: error
-  #         path: build
+      # 构建缓存
+      - name: Save build folder
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          if-no-files-found: error
+          path: build
 
-  #     - name: Cypress install
-  #       uses: cypress-io/github-action@v2
-  #       with:
-  #         runTests: false
-  #         build: yarn build
+      - name: Cypress install
+        uses: cypress-io/github-action@v2
+        with:
+          runTests: false
+          build: yarn build
 
   Cypress-run:
     runs-on: ubuntu-latest
     # cypress browser docker
-    container: cypress/browsers:node16.14.2-slim-chrome100-ff99-edge  
-    strategy:
-      fail-fast: false
+    container: cypress/browsers:node16.14.2-slim-chrome100-ff99-edge
+    needs: Cypress-install
+    # strategy:
+    #   fail-fast: false
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
-      # - name: Download the build folders
-      #   uses: actions/download-artifact@v3
-      #   with:
-      #     name: build
-      #     path: build
+      - name: Download the build folders
+        uses: actions/download-artifact@v3
+        with:
+          name: build
+          path: build
 
       # Runs a set of commands using the runners shell
       - name: Cypress-run
@@ -62,27 +63,27 @@ jobs:
         with:
           browser: chrome
           record: true
-          group: "UI - Chrome"
-          spec: integration/*
+          # group: "UI - Chrome"
+          # spec: integration/*
         env:
           CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
           CYRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
       # 发送邮件
-      - name: send_email
-        # 只有当上面失败时才运行发送邮件
-        if: failure()
-        uses: dawidd6/action-send-mail@v3
-        with:
-          server_address: smtp.gmail.com
-          server_port: 465
-          username: ${{ secrets.EMAIL_ACCOUNT }}
-          password: ${{ secrets.EMAIL_PASSWORD }}
-          subject: GTM errors
-          to: ${{ secrets.EMAIL_RECEIVER }}
-          # Required sender full name (address can be skipped):
-          from: ${{ secrets.EMAIL_RECEIVER }}
-          secure: true
-          body: We have some wrong orders on GTM.
-          priority: high
+      # - name: send_email
+      #   # 只有当上面失败时才运行发送邮件
+      #   if: failure()
+      #   uses: dawidd6/action-send-mail@v3
+      #   with:
+      #     server_address: smtp.gmail.com
+      #     server_port: 465
+      #     username: ${{ secrets.EMAIL_ACCOUNT }}
+      #     password: ${{ secrets.EMAIL_PASSWORD }}
+      #     subject: GTM errors
+      #     to: ${{ secrets.EMAIL_RECEIVER }}
+      #     # Required sender full name (address can be skipped):
+      #     from: ${{ secrets.EMAIL_RECEIVER }}
+      #     secure: true
+      #     body: We have some wrong orders on GTM.
+      #     priority: high
