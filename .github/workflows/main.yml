@@ -51,7 +51,7 @@ jobs:
         with:
           browser: chrome
           record: true
-          # group: "UI - Chrome"
+          parallel: true
           spec: ../integration/3-GA/*
           group: Actions test
         env:
