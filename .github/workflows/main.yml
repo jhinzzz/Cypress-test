@@ -52,7 +52,7 @@ jobs:
           browser: chrome
           record: true
           # group: "UI - Chrome"
-          spec: ./integration/3-GA/*
+          spec: integration/3-GA/*
         env:
           CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
           CYRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
