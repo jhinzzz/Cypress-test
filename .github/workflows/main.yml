@@ -1,10 +1,6 @@
-# This is a basic workflow to help you get started with Actions
-
 name: GTM test
 
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
   push:
     branches: [ master ]
   # 定时任务
@@ -20,7 +16,7 @@ jobs:
     container: cypress/browsers:node16.14.2-slim-chrome100-ff99-edge
     steps:
       - name: Checkout
-      - uses: actions/checkout@v3
+        uses: actions/checkout@v3
 
       - name: Cypress install
         uses: cypress-io/github-action@v2
