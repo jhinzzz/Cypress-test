@@ -60,6 +60,7 @@ jobs:
       - name: Cypress-run
         uses: cypress-io/github-action@v2
         with:
+          browser: chrome
           record: true
           group: "UI - Chrome"
           spec: integration/*
