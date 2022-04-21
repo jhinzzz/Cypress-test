@@ -13,20 +13,22 @@ on:
   # 手动触发
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # 构建
+  # 缓存环境
   Cypres-install:
     runs-on: ubuntu-latest
     container: cypress/browsers:node16.14.2-slim-chrome100-ff99-edge
-    env:
-    # Steps represent a sequence of tasks that will be executed as part of the job
+
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout
       - uses: actions/checkout@v3
 
-      # 构建缓存
+      - name: Cypress install
+        uses: cypress-io/github-action@v2
+        with:
+          runTests: false
+
+      # 保存缓存
       - name: Save build folder
         uses: actions/upload-artifact@v3
         with:
@@ -34,11 +36,6 @@ jobs:
           if-no-files-found: error
           path: build
 
-      - name: Cypress install
-        uses: cypress-io/github-action@v2
-        with:
-          runTests: false
-          build: yarn build
 
   Cypress-run:
     runs-on: ubuntu-latest
@@ -50,14 +47,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-
+      # 下载缓存
       - name: Download the build folders
         uses: actions/download-artifact@v3
         with:
           name: build
           path: build
-
-      # Runs a set of commands using the runners shell
+      # 运行cypress
       - name: Cypress-run
         uses: cypress-io/github-action@v2
         with:
