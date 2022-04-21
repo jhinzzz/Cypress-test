@@ -1,5 +1,7 @@
 {
   "projectId": "vs4d6v",
+  "integrationFolder": "cypress/integration",
+  "testFiles": "**/*.*",
   "env": {
 
     "SG_API": "https://api.castlery.sg",
