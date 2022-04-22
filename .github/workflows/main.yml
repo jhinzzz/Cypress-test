@@ -47,12 +47,12 @@ jobs:
       #     path: build
       # 运行cypress
       - name: Cypress-run
-        uses: cypress-io/github-action@v2.9.7
+        uses: cypress-io/github-action@v3
         with:
+          working-directory: integration/3-GA
           browser: chrome
           record: true
           parallel: true
-          spec: integration/3-GA/PDP-AU-SIMPLE.spec.js
           group: Actions test
         env:
           CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
