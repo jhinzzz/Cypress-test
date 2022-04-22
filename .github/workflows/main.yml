@@ -45,6 +45,12 @@ jobs:
       #   with:
       #     name: build
       #     path: build
+      
+      # 安装node
+      - name: Install-Node
+        uses: actions/setup-node@3
+        with:
+          node: version: '16'
       # 运行cypress
       - name: Cypress-run
         uses: cypress-io/github-action@v3
