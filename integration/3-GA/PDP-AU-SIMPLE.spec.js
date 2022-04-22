@@ -4,6 +4,7 @@
   尽量选择稳定的产品来进行测试，否则更换产品需要全面更新断言测试
 */
 
+
 /*---------------------------断言结果---------------------------*/
 let PageView_result = false;        // PV断言结果
 let product_detail_res = false;     // product_detail断言结果
