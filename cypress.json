@@ -32,6 +32,6 @@
     "US_LLT": "/products/theo-dining-table-with-4-joshua-chairs"
   },
   "pageLoadTimeout": 60000,
-  "defaultCommandTimeout": 10000,
+  "defaultCommandTimeout": 15000,
   "chromeWebSecurity": false
 }

@@ -30,9 +30,9 @@ describe("US test", () => {
       "GET",
       Cypress.env("US_API") + "/v2" + Cypress.env("US_LLT")  //更新产品直接切换后面的url参数即可
     ).then((response) => {
-      label = response.body.variants[1].sku;
+      label = response.body.variants[0].sku;
       label += " | ";
-      label += response.body.variants[1].name;
+      label += response.body.variants[0].name;
     });
   });
 
