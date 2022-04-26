@@ -48,7 +48,7 @@ jobs:
       
       # 安装node
       - name: Install-Node
-        uses: actions/setup-node@3
+        uses: actions/setup-node@2
         with:
           node-version: '14'
       # 运行cypress
