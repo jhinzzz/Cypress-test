@@ -1,8 +1,8 @@
 name: GTM test
 
 on:
-  # push:
-  #   branches: [ master ]
+  push:
+    branches: [ master ]
   # 定时任务
   schedule:
     - cron: '0 0 * * *'

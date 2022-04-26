@@ -23,7 +23,7 @@ describe("SG test", () => {
   before("product information prepared", () => {
     expect(date, "today is no need to update product").to.not.equal("2022/5/25"); //先判断是否需要更新产品
     // 设置cookie并判断cookie是否设置成功
-    cy.setCookie('select_country_hint_hidden', true)
+    cy.setCookie('select_country_hint_hidden', 'true')
     cy.getCookie('select_country_hint_hidden').should(
     'have.property',
     'value',
