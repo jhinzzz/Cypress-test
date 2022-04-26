@@ -38,6 +38,14 @@ let product_pic_type;
 describe("test PDP GTM", () => {
   /*---------------------------前置数据设置---------------------------*/
   before("product imformation prepared", () => {
+    // 设置cookie并判断cookie是否设置成功
+    cy.setCookie('select_country_hint_hidden', true)
+    cy.getCookie('select_country_hint_hidden').should(
+    'have.property',
+    'value',
+    true
+    )
+
     cy
       .request("GET", Cypress.env("US_API") + "/v2" + Cypress.env("US_SIM"))
       .then((response) => {
