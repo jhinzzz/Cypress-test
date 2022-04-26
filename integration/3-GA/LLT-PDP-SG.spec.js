@@ -24,11 +24,8 @@ describe("SG test", () => {
     expect(date, "today is no need to update product").to.not.equal("2022/5/25"); //先判断是否需要更新产品
     // 设置cookie并判断cookie是否设置成功
     cy.setCookie('select_country_hint_hidden', 'true')
-    cy.getCookie('select_country_hint_hidden').should(
-    'have.property',
-    'value',
-    true
-    )
+    cy.getCookie('select_country_hint_hidden').should('have.property','value', 'true')
+    
     cy.request(
       "GET",
       Cypress.env("SG_API") + "/v2" + Cypress.env("SG_LLT")  //更新产品直接切换后面的url参数即可

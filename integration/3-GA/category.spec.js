@@ -5,11 +5,7 @@ describe('test SG category', ()=>{
     before('setcookie',()=>{
         // 设置cookie并判断cookie是否设置成功
         cy.setCookie('select_country_hint_hidden', 'true')
-        cy.getCookie('select_country_hint_hidden').should(
-        'have.property',
-        'value',
-        true
-        )
+        cy.getCookie('select_country_hint_hidden').should('have.property','value', 'true')
     })
     it('test catgory', ()=>{
         cy.visit('https://www.castlery.com/sg/?&dyApiPreview=64279e3c7151aa8f796aad476b6a5c08')

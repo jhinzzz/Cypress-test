@@ -44,11 +44,7 @@ describe("test PDP GTM", () => {
   before("product imformation prepared", () => {
     // 设置cookie并判断cookie是否设置成功
     cy.setCookie('select_country_hint_hidden', 'true')
-    cy.getCookie('select_country_hint_hidden').should(
-    'have.property',
-    'value',
-    true
-    )    
+    cy.getCookie('select_country_hint_hidden').should('have.property','value', 'true') 
     
     cy
       .request("GET", Cypress.env("SG_API") + "/v2" + Cypress.env("SG_BUN"))

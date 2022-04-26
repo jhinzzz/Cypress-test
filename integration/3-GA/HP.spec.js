@@ -16,11 +16,7 @@ describe('test SG pageview', ()=>{
         // })
         // 设置cookie并判断cookie是否设置成功
         cy.setCookie('select_country_hint_hidden', 'true')
-        cy.getCookie('select_country_hint_hidden').should(
-        'have.property',
-        'value',
-        true
-        )
+        cy.getCookie('select_country_hint_hidden').should('have.property','value', 'true')
     })
     it('test SG HP', ()=>{
         cy.visit(Cypress.env('SG_HPG'))
