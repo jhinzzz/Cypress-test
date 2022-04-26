@@ -13,7 +13,7 @@ describe('test SG category', ()=>{
         cy.window().then((win)=>{
             //  测试link_click
             const link_click_res = win.dataLayer.some((dl)=>{
-                if(dl.event === 'trackEvent' && dl['eventDetails.label'] === 'Living Room'){  
+                if(dl.event === 'trackEvent' && dl['eventDetails.label'] === 'Sofas'){  
                     return true
                 }
             })

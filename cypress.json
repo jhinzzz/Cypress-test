@@ -1,6 +1,6 @@
 {
   "projectId": "vs4d6v",
-  "integrationFolder": "cypress/integration",
+  "integrationFolder": "integration",
   "testFiles": "**/*.spec.js",
   "env": {
 
@@ -20,7 +20,7 @@
     "AU_SIM": "/products/joseph-bedside-table",
     "AU_CON": "/products/cammy-armchair?material=dove_grey",
     "AU_BUN": "/products/miles-dining-table-with-4-chairs",
-    "AU_LLT": "/products/jaxon-round-coffee-table",
+    "AU_LLT": "/products/alexander-tv-unit-200cm",
 
     "US_API": "https://api.castlery.co",
     "US_HPG": "https://www.castlery.com/us",
