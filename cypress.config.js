@@ -37,7 +37,7 @@ module.exports = defineConfig({
     setupNodeEvents(on, config) {
       return require('./plugins/index.js')(on, config)
     },
-    specPattern: 'cypress/e2e/**/*.spec.js',
+    specPattern: './e2e/**/*.spec.js',
     supportFile: false,
   },
 })
