@@ -1,6 +1,6 @@
 {
   "projectId": "vs4d6v",
-  "integrationFolder": "integration",
+  "integrationFolder": "cypress/integration",
   "testFiles": "**/*.spec.js",
   "env": {
 
@@ -23,13 +23,13 @@
     "AU_LLT": "/products/alexander-tv-unit-200cm",
 
     "US_API": "https://api.castlery.co",
-    "US_HPG": "https://www.castlery.com/us",
+    "US_HPG": "https://www-uat.castlery.com/us",
     "US_MAP": "https://api.castlery.co/sitemap/products",
-    "US_PDP": "https://www.castlery.com/us/products",
+    "US_PDP": "https://www-uat.castlery.com/us/products",
     "US_SIM": "/products/cliff-shelf",
     "US_CON": "/products/nathan-velvet-sofa-bed",
     "US_BUN": "/products/ethan-chaise-sectional-sofa-with-ottoman",
-    "US_LLT": "/products/theo-dining-table-with-4-joshua-chairs"
+    "US_LLT": "/products/vincent-dining-table-with-2-chairs-walnut-and-doris-bench"
   },
   "pageLoadTimeout": 60000,
   "defaultCommandTimeout": 15000,

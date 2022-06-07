@@ -67,14 +67,14 @@ describe("test PDP GTM", () => {
             product_detail_label = detail.presentation + " - " + detail.value;
           }
         });
-        let product_pic_position = response.body.variants[0].images[0].position
-        product_pic_type = response.body.variants[0].images[0].type
-        response.body.variants[0].assets.find((a)=>{
-          if(a.position < product_pic_position){
-            product_pic_position = a.position
-            product_pic_type = a.type
-          }
-        })
+        // let product_pic_position = response.body.variants[0].images[0].position
+        // product_pic_type = response.body.variants[0].images[1].type
+        // response.body.variants[0].assets.find((a)=>{
+        //   if(a.position < product_pic_position){
+        //     product_pic_position = a.position
+        //     product_pic_type = a.type
+        //   }
+        // })
       })
     });
 
@@ -82,7 +82,7 @@ describe("test PDP GTM", () => {
   it("test US bundle", () => {
 
     /*---------------------------------------------触发GTM---------------------------------------------*/
-    cy.visit(Cypress.env("US_HPG") + Cypress.env("US_BUN"));
+    cy.visit(Cypress.env("US_HPG") + Cypress.env("US_BUN"), {auth:{username:'castlery', password:'cslr$T@g'}});
     cy.get("span.is-active").prev().find("a").then(($a)=>{
       product_category = $a.text()
     })
@@ -96,7 +96,7 @@ describe("test PDP GTM", () => {
     // 触发remove_cart
     cy.get('[data-selenium="cart-item-remove"]').click(); 
     // 关闭cart
-    cy.get('svg[aria-label="arrow-stick-next"]').click(); 
+    cy.get("button[data-selenium='close-cart']").click({multiple:true}); 
     // 触发options_change，后续需要修改标签
     cy.get("h4").contains("Ethan Chaise Sectional Sofa").click().then(()=>{
         cy.get("svg[aria-label='right']").click().then(()=>{
@@ -119,6 +119,7 @@ describe("test PDP GTM", () => {
           getBody().find("#close-button").click();
         });
       }); 
+    // cy.get(li.slick-active).next().click()
     cy.wait(3000)
     // 触发details_expand
     cy.get("h3").contains("Product Details").click().then(() => {
@@ -174,14 +175,14 @@ describe("test PDP GTM", () => {
           dy_navi_res = true;
         }
         //测试pdp_image
-        if (
-          dl.event === "trackEvent" &&
-          dl["eventDetails.category"] === "pdp_image" &&
-          dl["eventDetails.label"] === product_pic_type &&
-          dl["eventDetails.sku_id"] === product_sku
-        ) {
-          pdp_image_res = true;
-        }
+        // if (
+        //   dl.event === "trackEvent" &&
+        //   dl["eventDetails.category"] === "pdp_image" &&
+        //   dl["eventDetails.label"] === product_pic_type &&
+        //   dl["eventDetails.sku_id"] === product_sku
+        // ) {
+        //   pdp_image_res = true;
+        // }
         //测试wish_list
         if (
           dl.event === "trackEvent" &&
@@ -298,7 +299,7 @@ describe("test PDP GTM", () => {
       expect(PageView_result, "is PDP has a pageview").to.equal(true);                  // 断言PageView
       expect(product_detail_res, "is PDP has a product_detail").to.equal(true);         // 断言product_detail
       expect(dy_navi_res, "is PDP has a DY web_navi").to.equal(true);                   // 断言DY_web_navi
-      expect(pdp_image_res, "is PDP has a pdp_iamge").to.equal(true);                   // 断言pdp_image
+      // expect(pdp_image_res, "is PDP has a pdp_iamge").to.equal(true);                   // 断言pdp_image
       expect(wish_list_res, "is PDP has a wish_list").to.equal(true);                   // 断言wish_list
       expect(addto_cart_res, "is PDP has a add_to_cart").to.equal(true);                // 断言add_to_cart
       expect(cart_PageView_res, "is PDP has a cart_pageview").to.equal(true);           // 断言cart_PageView

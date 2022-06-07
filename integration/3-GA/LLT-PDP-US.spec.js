@@ -38,7 +38,7 @@ describe("US test", () => {
 
   /*---------------------------测试主体---------------------------*/
   it("LLT test", () => {
-    cy.visit(Cypress.env("US_HPG") + Cypress.env("US_LLT"));
+    cy.visit(Cypress.env("US_HPG") + Cypress.env("US_LLT"),{auth:{username:'castlery',password:'cslr$T@g'}});
 
     cy.get('[data-selenium="add_to_cart"]').click(); //触发LLT_popup_dispaly
     cy.get(".ZKM6kW__button")

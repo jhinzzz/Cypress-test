@@ -1,0 +1,85 @@
+name: PDP 404 Test
+
+on:
+  # push:
+  #   branches: [ master ]
+  # 定时任务
+  schedule:
+    - cron: '0 0 * * *'
+  # 手动触发
+  workflow_dispatch:
+
+jobs:
+  # 缓存环境
+  # Cypress-install:
+  #   runs-on: ubuntu-latest
+  #   container: cypress/browsers:node16.14.2-slim-chrome100-ff99-edge
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v3
+
+  #     - name: Cypress install
+  #       uses: cypress-io/github-action@v3.0.3
+  #       with:
+  #         runTests: false
+  #     # 保存缓存
+  #     - name: Save build folder
+  #       uses: actions/upload-artifact@v3
+  #       with:
+  #         name: build
+  #         if-no-files-found: error
+  #         path: build
+
+
+  Cypress-run:
+    runs-on: ubuntu-latest
+    # cypress browser docker
+    container: cypress/browsers:node16.14.2-slim-chrome100-ff99-edge
+    # needs: Cypress-install
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      # 储存maps
+      - name: Cypress-Sava-maps
+        uses: cypress-io/github-action@v3
+        with:
+          browser: chrome
+          record: true
+          parallel: true
+          group: Actions test
+          spec: integration/1-SLUG-collector/*
+        env:
+          CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # 测试页面
+      - name: Cypress-Test-PDP
+        needs: Cypress-Test-PDP
+        uses: cypress-io/github-action@v3
+         with:
+          browser: chrome
+          record: true
+          parallel: true
+          group: Actions test
+          spec: integration/2-PDP-traversal/*
+        env:
+          CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # 发送邮件
+      - name: send_email
+        # 只有当上面失败时才运行发送邮件
+        if: failure()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.EMAIL_ACCOUNT }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: GTM errors
+          to: ${{ secrets.EMAIL_RECEIVER }}
+          # Required sender full name (address can be skipped):
+          from: ${{ secrets.EMAIL_RECEIVER }}
+          secure: true
+          body: We have some wrong orders on GTM.
+          priority: high
