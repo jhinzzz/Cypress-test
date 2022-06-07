@@ -39,6 +39,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
       # 储存maps
       - name: Cypress-Sava-maps
         uses: cypress-io/github-action@v3
@@ -52,9 +53,10 @@ jobs:
           CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
       # 测试页面
       - name: Cypress-Test-PDP
-        needs: Cypress-Test-PDP
+        needs: Cypress-Save-maps
         uses: cypress-io/github-action@v3
          with:
           browser: chrome
