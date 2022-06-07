@@ -56,6 +56,7 @@ jobs:
 
       # 测试页面
   Cypress-Test-PDP:
+    needs: Cypress-Save-maps
     runs-on: ubuntu-latest
     # cypress browser docker
     container: cypress/browsers:node16.14.2-slim-chrome100-ff99-edge
@@ -63,9 +64,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        
+
       - name: Cypress-Test-PDP
-        needs: Cypress-Save-maps
         uses: cypress-io/github-action@v3
         with:
           browser: chrome
