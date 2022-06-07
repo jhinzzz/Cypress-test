@@ -26,8 +26,7 @@ module.exports = defineConfig({
     US_SIM: '/products/cliff-shelf',
     US_CON: '/products/nathan-velvet-sofa-bed',
     US_BUN: '/products/ethan-chaise-sectional-sofa-with-ottoman',
-    US_LLT:
-      '/products/vincent-dining-table-with-2-chairs-walnut-and-doris-bench',
+    US_LLT: '/products/vincent-dining-table-with-2-chairs-walnut-and-doris-bench',
   },
   pageLoadTimeout: 60000,
   defaultCommandTimeout: 15000,
@@ -39,5 +38,6 @@ module.exports = defineConfig({
       return require('./cypress/plugins/index.js')(on, config)
     },
     specPattern: 'cypress/e2e/**/*.spec.js',
+    supportFile: false,
   },
 })
