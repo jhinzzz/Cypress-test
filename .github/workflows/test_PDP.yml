@@ -48,7 +48,7 @@ jobs:
           record: true
           parallel: true
           group: Actions test
-          spec: integration/1-SLUG-collector/*
+          spec: e2e/1-SLUG-collector/*
         env:
           CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
@@ -63,7 +63,7 @@ jobs:
           record: true
           parallel: true
           group: Actions test
-          spec: integration/2-PDP-traversal/*
+          spec: e2e/2-PDP-traversal/*
         env:
           CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
