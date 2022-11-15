@@ -78,7 +78,7 @@ describe("test PDP GTM", () => {
       // 触发details_expand
       PDP.getDetail().click().then(() =>{
         // 触发pdp_property 
-        PDP.getPropertyExpand(GA.productDetailValue).click();
+        PDP.getPropertyExpand(GA.productDetailValue).click({force:true});
         //关闭property弹窗，后续需要修改标签
         PDP.getPropertyClose().click();
         // 触发details_close  
