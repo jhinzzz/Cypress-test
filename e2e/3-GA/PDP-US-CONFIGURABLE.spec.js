@@ -93,7 +93,7 @@ describe("Test PDP GTM", () => {
       */
 
       // 触发details_expand
-      PDP.getDetail().click().then(()=>{
+      PDP.getDetail().click().then(() =>{
         // 触发pdp_property 
         PDP.getPropertyExpand(GA.productDetailValue).click();
         //关闭property弹窗，后续需要修改标签
