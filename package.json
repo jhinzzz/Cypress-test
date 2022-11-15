@@ -1,6 +1,6 @@
 {
   "devDependencies": {
-    "cypress": "^10.0.3",
+    "cypress": "^11.0.1",
     "cypress-iframe": "^1.0.1",
     "cypress-wait-until": "^1.7.2"
   },

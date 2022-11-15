@@ -48,7 +48,7 @@ jobs:
       
       # 运行cypress
       - name: Cypress-run
-        uses: cypress-io/github-action@v3
+        uses: cypress-io/github-action@v4
         with:
           browser: chrome
           record: true
