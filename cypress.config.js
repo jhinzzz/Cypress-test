@@ -31,6 +31,7 @@ module.exports = defineConfig({
   pageLoadTimeout: 60000,
   defaultCommandTimeout: 15000,
   chromeWebSecurity: false,
+  fixturesFolder: './fixtures',
   e2e: {
     // We've imported your old cypress plugins here.
     // You may want to clean this up later by importing these.
