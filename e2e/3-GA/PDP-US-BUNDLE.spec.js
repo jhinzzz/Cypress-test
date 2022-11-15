@@ -65,46 +65,47 @@ describe("test PDP GTM", () => {
 
     /*---------------------------------------------触发GTM---------------------------------------------*/
     const PDP = new ProductDetailPage();
-    cy.visit(Cypress.env("US_HPG") + Cypress.env("US_BUN"));
-    // 触发PDP_image
-    PDP.getImage().click();
-    // 触发wish_list
-    PDP.getWishList().click();
-    // 触发add_to_cart
-    PDP.getATC().click(); 
-    // 触发remove_cart
-    PDP.getRemove().click();
-    // 关闭cart
-    PDP.getCloseCart().click();
-    // 触发options_change，后续需要修改标签
-    PDP.clickOption(GA.productSwitchLength)
-    // 触发x_reviews，后续需要修改标签
-    PDP.clickXReviews();
-    // 触发review_dropdown
-    PDP.clickMostRecent()
-    /**
-     * Cypress对于iframe的支持太差，目前无法解决问题
-    // 触发installment_expand
-    PDP.getInstallmentExpand('us').click({multiple:true});
-    // 触发installment_close，后续需要修改标签
-    PDP.getInstallmentClose('us');
-     */
-    // 触发details_expand
-    PDP.getDetail().click();
-    // 触发pdp_property 
-    PDP.getPropertyExpand(GA.productDetailValue).click();
-    //关闭property弹窗，后续需要修改标签
-    PDP.getPropertyClose().click();
-    // 触发details_close  
-    PDP.getDetail().click();
-    // 触发dimensions_expand
-    PDP.getDimensions().click();
-    // 触发dimensions_close
-    PDP.getDimensions().click();
-    // 触发delivery_expand
-    PDP.getDelivery().click();
-    // 触发delivery_close
-    PDP.getDelivery().click();
+    cy.visit(Cypress.env("US_HPG") + Cypress.env("US_BUN")).then(() =>{
+      // 触发PDP_image
+      PDP.getImage().click();
+      // 触发wish_list
+      PDP.getWishList().click();
+      // 触发add_to_cart
+      PDP.getATC().click(); 
+      // 触发remove_cart
+      PDP.getRemove().click();
+      // 关闭cart
+      PDP.getCloseCart().click();
+      // 触发options_change，后续需要修改标签
+      PDP.clickOption(GA.productSwitchLength)
+      // 触发x_reviews，后续需要修改标签
+      PDP.clickXReviews();
+      // 触发review_dropdown
+      PDP.clickMostRecent()
+      /**
+       * Cypress对于iframe的支持太差，目前无法解决问题
+      // 触发installment_expand
+      PDP.getInstallmentExpand('us').click({multiple:true});
+      // 触发installment_close，后续需要修改标签
+      PDP.getInstallmentClose('us');
+      */
+      // 触发details_expand
+      PDP.getDetail().click();
+      // 触发pdp_property 
+      PDP.getPropertyExpand(GA.productDetailValue).click();
+      //关闭property弹窗，后续需要修改标签
+      PDP.getPropertyClose().click();
+      // 触发details_close  
+      PDP.getDetail().click();
+      // 触发dimensions_expand
+      PDP.getDimensions().click();
+      // 触发dimensions_close
+      PDP.getDimensions().click();
+      // 触发delivery_expand
+      PDP.getDelivery().click();
+      // 触发delivery_close
+      PDP.getDelivery().click();
+    });
   })
   it('Assert US Bundle', ()=>{
     /*---------------------------------------------断言状态---------------------------------------------*/

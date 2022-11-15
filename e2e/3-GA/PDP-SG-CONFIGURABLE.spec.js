@@ -60,8 +60,8 @@ describe("test PDP GTM", () => {
   /*---------------------------测试主体---------------------------*/
   it("test SG configurable", () => {
     const PDP = new ProductDetailPage();
-    cy.visit(Cypress.env("SG_HPG") + Cypress.env("SG_CON"));
-    /*---------------------------------------------触发GTM---------------------------------------------*/
+    cy.visit(Cypress.env("SG_HPG") + Cypress.env("SG_CON")).then(() =>{
+          /*---------------------------------------------触发GTM---------------------------------------------*/
     
     // GA.productDimension = PDP.getDimension();
     // 触发PDP_image
@@ -104,6 +104,7 @@ describe("test PDP GTM", () => {
     PDP.getDelivery().click();
     // 触发delivery_close
     PDP.getDelivery().click();
+    });
   })
   it('Assert SG configurable', ()=>{
     /*---------------------------------------------断言状态---------------------------------------------*/
