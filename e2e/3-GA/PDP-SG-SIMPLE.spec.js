@@ -76,11 +76,12 @@ describe("test PDP GTM", () => {
       // 触发review_dropdown
       PDP.clickMostRecent()
       // 触发details_expand
-      PDP.getDetail().click();
-      // 触发pdp_property 
-      PDP.getPropertyExpand(GA.productDetailValue).click();
-      //关闭property弹窗，后续需要修改标签
-      PDP.getPropertyClose().click();
+      PDP.getDetail().click().then(() =>{
+        // 触发pdp_property 
+        PDP.getPropertyExpand(GA.productDetailValue).click();
+        //关闭property弹窗，后续需要修改标签
+        PDP.getPropertyClose().click();
+      });
       // 触发details_close  
       PDP.getDetail().click();
       // 触发dimensions_expand
