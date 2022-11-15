@@ -4,6 +4,7 @@
   尽量选择稳定的产品来进行测试，否则更换产品需要全面更新断言测试
 */
 import ProductDetailPage from '../../support/PageObject/ProductDetailPage';
+import Cookie from '../../support/Common/setCookie'
 
 /*---------------------------前置数据定义---------------------------*/
 let GA;
@@ -13,9 +14,10 @@ describe("test PDP GTM", () => {
   /*---------------------------前置数据设置---------------------------*/
   before("product imformation prepared", () => {
     // 设置cookie并判断cookie是否设置成功
-    cy.setCookie('select_country_hint_hidden', 'true');
-    cy.getCookie('select_country_hint_hidden').should('have.property','value', 'true');
-    
+    const cookie = new Cookie();
+    cookie.hideCountry();
+    cookie.isHideCountry();
+    //通过fixture获取数据
     cy.fixture('GA_data').then(function (data){
       GA = data;
     });
