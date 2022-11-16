@@ -9,5 +9,6 @@
   },
   "scripts": {
     "cypress:open": "cypress open"
-  }
+  },
+  "license": "ISC"
 }
