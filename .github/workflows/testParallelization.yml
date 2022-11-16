@@ -27,6 +27,7 @@ jobs:
       # - run: yarn lint
       # - run: yarn test:unit:ci
       # - run: yarn build:ci
+      - run: mkdir build
 
       # 保存build
       - name: Save build folder
