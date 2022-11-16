@@ -25,8 +25,8 @@ jobs:
       - run: node -p 'os.cpus()'
       # - run: yarn types
       # - run: yarn lint
-      - run: yarn test:unit:ci
-      - run: yarn build:ci
+      # - run: yarn test:unit:ci
+      # - run: yarn build:ci
 
       # 保存build
       - name: Save build folder
