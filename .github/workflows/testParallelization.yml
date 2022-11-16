@@ -1,0 +1,99 @@
+name: Test parallel GA
+
+on:
+  push:
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    container:
+      # 镜像 https://github.com/cypress-io/cypress-docker-images/tree/master/browsers
+      image: cypress/browsers::node16.16.0-chrome106-ff99-edge
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Cypress installment
+        uses: cypress-io/github-action@v4
+        with:
+          runTests: false # 不运行测试
+
+      # yarn语句安装Cypress
+      - run: yarn cypress info
+      - run: node --version
+      - run: node -p 'os.cpus()'
+      - run: yarn types
+      - run: yarn lint
+      - run: yarn test:unit:ci
+      - run: yarn build:ci
+
+      # 保存build
+      - name: Save build folder
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          if-no-files-found: error
+          path: build
+  
+  GA-chrome-test:
+    # 设置过期测试过期时间
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    container:
+      # 必须使用与之前一致的镜像
+      image: cypress/browsers::node16.16.0-chrome106-ff99-edge
+    needs: install
+    strategy:
+      # 当一个测试用例失败时，不取消测试
+      fail-fast: false
+      matrix:
+        # 并发
+        containers: [1, 2, 3, 4, 5]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Download the build folders
+        uses: actions/download-artifact@v3
+        with:
+          name: build
+          path: build
+
+      - name: "GA Tests - Chrome"
+        uses: cypress-io/github-action@v4
+        with:
+          start: yarn start:ci
+          wait-on: "http://localhost:3000"
+          wait-on-timeout: 120
+          browser: chrome
+          record: true
+          parallel: true
+          group: "GA - Chrome"
+          spec: e2e/3-GA/*
+          config-file: cypress.config.js
+        env:
+          CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          # Recommended: pass the GitHub token lets this action correctly
+          # determine the unique run id necessary to re-run the checks
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # 发送邮件
+      - name: send_email
+        # 只有当上面失败时才运行发送邮件
+        if: failure()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.EMAIL_ACCOUNT }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: GTM errors
+          to: ${{ secrets.EMAIL_RECEIVER }}
+          # Required sender full name (address can be skipped):
+          from: ${{ secrets.EMAIL_RECEIVER }}
+          secure: true
+          body: We have some wrong orders on GTM.
+          priority: high
