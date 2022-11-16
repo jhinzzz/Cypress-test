@@ -27,14 +27,13 @@ jobs:
       # - run: yarn lint
       # - run: yarn test:unit:ci
       # - run: yarn build:ci
-      - run: mkdir build
 
       # 保存build
       - name: Save build folder
         uses: actions/upload-artifact@v3
         with:
           name: build
-          if-no-files-found: error
+          if-no-files-found: warn
           path: build
   
   GA-chrome-test:
