@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       # 镜像 https://github.com/cypress-io/cypress-docker-images/tree/master/browsers
-      image: cypress/browsers::node16.16.0-chrome106-ff99-edge
+      image: cypress/browsers:node16.16.0-chrome106-ff99-edge
 
     steps:
       - name: Checkout
@@ -42,7 +42,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       # 必须使用与之前一致的镜像
-      image: cypress/browsers::node16.16.0-chrome106-ff99-edge
+      image: cypress/browsers:node16.16.0-chrome106-ff99-edge
     needs: install
     strategy:
       # 当一个测试用例失败时，不取消测试
