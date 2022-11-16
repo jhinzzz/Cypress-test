@@ -2,12 +2,15 @@ name: Test parallel GA
 
 on:
   push:
+  schedule:
+    - cron: '0 0 * * *'
 
 jobs:
   GA-chrome-test:
     # 设置过期测试过期时间
     timeout-minutes: 10
     runs-on: ubuntu-latest
+    # 安装node和浏览器
     container:
       # 必须使用与之前一致的镜像
       image: cypress/browsers:node16.16.0-chrome106-ff99-edge
@@ -49,10 +52,10 @@ jobs:
           server_port: 465
           username: ${{ secrets.EMAIL_ACCOUNT }}
           password: ${{ secrets.EMAIL_PASSWORD }}
-          subject: GTM errors
+          subject: GA tracking error
           to: ${{ secrets.EMAIL_RECEIVER }}
           # Required sender full name (address can be skipped):
           from: ${{ secrets.EMAIL_RECEIVER }}
           secure: true
-          body: We have some wrong orders on GTM.
+          body: GA tracking got some problems.
           priority: high
