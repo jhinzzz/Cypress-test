@@ -4,38 +4,6 @@ on:
   push:
 
 jobs:
-  install:
-    runs-on: ubuntu-latest
-    container:
-      # 镜像 https://github.com/cypress-io/cypress-docker-images/tree/master/browsers
-      image: cypress/browsers:node16.16.0-chrome106-ff99-edge
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Cypress installment
-        uses: cypress-io/github-action@v4
-        with:
-          runTests: false # 不运行测试
-
-      # yarn语句安装Cypress
-      - run: yarn cypress info
-      - run: node --version
-      - run: node -p 'os.cpus()'
-      # - run: yarn types
-      # - run: yarn lint
-      # - run: yarn test:unit:ci
-      - run: yarn build:ci
-
-      # 保存build
-      - name: Save build folder
-        uses: actions/upload-artifact@v3
-        with:
-          name: build
-          if-no-files-found: warn
-          path: build
-  
   GA-chrome-test:
     # 设置过期测试过期时间
     timeout-minutes: 10
@@ -43,7 +11,6 @@ jobs:
     container:
       # 必须使用与之前一致的镜像
       image: cypress/browsers:node16.16.0-chrome106-ff99-edge
-    needs: install
     strategy:
       # 当一个测试用例失败时，不取消测试
       fail-fast: false
@@ -55,17 +22,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Download the build folders
-        uses: actions/download-artifact@v3
-        with:
-          name: build
-          path: build
-
       - name: "GA Tests - Chrome"
         uses: cypress-io/github-action@v4
         with:
-          start: yarn start:ci
-          wait-on: "http://localhost:3000"
           wait-on-timeout: 120
           browser: chrome
           record: true
