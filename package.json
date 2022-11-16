@@ -8,7 +8,16 @@
     "mockjs": "^1.1.0"
   },
   "scripts": {
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "types": "tsc --noEmit",
+    "lint": "eslint && prettier --check \"**/**.{ts,js,tsx}\" \"*.{json,md,yml}\"",
+    "start": "cross-env NODE_ENV=development concurrently yarn:start:react yarn:start:api",
+    "start:ci": "cross-env NODE_ENV=test concurrently yarn:start:react:proxy-server yarn:start:api",
+    "test:api": "yarn cypress:run --spec 'cypress/tests/api/*'",
+    "test:unit": "react-scripts test --runInBand",
+    "test:unit:ci": "react-scripts test --watchAll false --ci --runInBand",
+    "build": "react-scripts build",
+    "build:ci": "react-scripts build"
   },
   "license": "ISC"
 }
