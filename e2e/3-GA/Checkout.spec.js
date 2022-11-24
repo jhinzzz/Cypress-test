@@ -28,7 +28,7 @@ describe('Test product impression', () =>{
         cookie.isHideCountry();
     });
     for(let i=0; i < nation.length; i++) {
-        describe(nation[i] + 'Test checkout', () => {
+        describe(nation[i] + 'Test checkout flow', () => {
             // 每次测试开始前，同步登录态
             beforeEach(() => {
                 const GA = new GATracing(nation[i], '_LOGIN');
@@ -58,7 +58,7 @@ describe('Test product impression', () =>{
             })
 
             // 测试Address page
-            it(nation[i] + ' Test Address', () =>{
+            it(nation[i] + ' Test Address page', () =>{
                 pageType = '_ADDRESS';
                 const GA = new GATracing(nation[i], pageType);
                 const address = new AddressOperation(nation[i]);
@@ -72,7 +72,7 @@ describe('Test product impression', () =>{
             })
     
             // 测试Shipping Method page
-            it(nation[i] + ' Test Shipping Method', () =>{
+            it(nation[i] + ' Test Shipping Method page', () =>{
                 pageType = '_METHOD';
                 const GA = new GATracing(nation[i], pageType);
                 const method = new ShippingMethodOperation(nation[i]);
@@ -85,7 +85,7 @@ describe('Test product impression', () =>{
             })
     
             // 测试Payment & Success page
-            it(nation[i] + ' Test Payment', () =>{
+            it(nation[i] + ' Test Payment page', () =>{
                 pageType = '_PAYMENT';
                 const GA = new GATracing(nation[i], pageType);
                 const payment = new PaymentOperation(nation[i]);
