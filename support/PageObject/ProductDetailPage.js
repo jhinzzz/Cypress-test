@@ -16,20 +16,26 @@ class ProductDetailPage{
         return cy.get('li.slick-active').next();
     };
     // 获取wishlist按钮
-    getWishList(){
+    getWishList() {
         return cy.get('[data-selenium="add_to_wishlist"]');
     }
     // 点击心愿单按钮
-    clickWishList(){
+    clickWishList() {
         return cy.get('[data-selenium="add_to_wishlist"]').click();
     }
     // 获取购买按钮
-    getATC(){
-        return cy.get('[data-selenium="add_to_cart"]')   ;
+    getATC() {
+        return cy.get('[data-selenium="add_to_cart"]').contains("Add To Cart");
+    }
+    getCart() {
+        return cy.get('[data-selenium="header-cart"]');
     }
     // 获取删除product的按钮
     getRemove(){
         return cy.get('[data-selenium="cart-item-remove"]');
+    }
+    getCheckout(){
+        return cy.get('[data-selenium="check-out"]');
     }
     // 获取关闭Cart的按钮
     getCloseCart(){

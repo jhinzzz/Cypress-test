@@ -2,24 +2,26 @@ name: Test parallel GA
 
 on:
   push:
+    - branch: master
   schedule:
     - cron: '0 0 * * *'
+  workflow_dispatch:
+  
 
 jobs:
   GA-chrome-test:
     # 设置过期测试过期时间
     timeout-minutes: 10
     runs-on: ubuntu-latest
-    # 安装node和浏览器
     container:
-      # 必须使用与之前一致的镜像
+      # 安装node和浏览器
       image: cypress/browsers:node16.16.0-chrome106-ff99-edge
     strategy:
       # 当一个测试用例失败时，不取消测试
       fail-fast: false
       matrix:
         # 并发
-        containers: [1, 2, 3, 4, 5]
+        containers: [1, 2, 3, 4, 5, 6, 7]
 
     steps:
       - name: Checkout
