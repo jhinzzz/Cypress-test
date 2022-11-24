@@ -71,6 +71,6 @@ module.exports = defineConfig({
       return require('./plugins/index.js')(on, config)
     },
     specPattern: './e2e/**/*.spec.js',
-    supportFile: './support/*.js',
+    supportFile: './support/e2e.js',
   },
 })
