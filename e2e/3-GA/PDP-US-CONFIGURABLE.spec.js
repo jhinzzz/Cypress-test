@@ -110,9 +110,8 @@ describe("Test PDP GTM", () => {
       // 触发delivery_close
       PDP.getDelivery().click();
     });
-  });
-    /*---------------------------------------------断言状态---------------------------------------------*/
-  it('Assert US configurable', ()=>{
+  // });
+  // it('Assert US configurable', ()=>{
     /*---------------------------------------------断言状态---------------------------------------------*/
     cy.window().then((win) => {
       win.dataLayer.some((dl) => {

@@ -101,8 +101,8 @@ describe("test PDP GTM", () => {
       PDP.getDelivery().click();
     });
 
-  })
-  it('Assert SG Bundle', ()=>{
+  // })
+  // it('Assert SG Bundle', ()=>{
     /*---------------------------------------------断言状态---------------------------------------------*/
     cy.window().then((win) => {
       win.dataLayer.some((dl) => {

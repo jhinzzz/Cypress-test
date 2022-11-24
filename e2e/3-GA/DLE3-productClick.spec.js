@@ -20,7 +20,7 @@ describe('Test product impression', () =>{
     });
 
     // 定义测试的国家和网页
-    const nation = ['AU', 'SG', 'US'];
+    const nation = Cypress.env('NATION');
     const pageType = '_CATEGORY'
     // 循环测试不同国家的productClick
     for (let n = 0; n < nation.length; n++) {

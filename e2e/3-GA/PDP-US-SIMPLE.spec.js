@@ -93,9 +93,9 @@ describe("test PDP GTM", () => {
       // 触发delivery_close
       PDP.getDelivery().click();
     });
-  })
+  // })
 
-  it('Assert US simple', ()=>{
+  // it('Assert US simple', ()=>{
     /*---------------------------------------------断言状态---------------------------------------------*/
     cy.window().then((win) => {
       win.dataLayer.some((dl) => {

@@ -103,8 +103,8 @@ describe("test PDP GTM", () => {
       // 触发delivery_close
       PDP.getDelivery().click();
     });
-  })
-  it('Assert AU Bundle', ()=>{
+  // })
+  // it('Assert AU Bundle', ()=>{
     /*---------------------------------------------断言状态---------------------------------------------*/
     cy.window().then((win) => {
       win.dataLayer.some((dl) => {
