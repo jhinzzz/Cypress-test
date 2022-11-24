@@ -4,7 +4,7 @@ import Cookie from '../../support/Common/setCookie';
 import GATracing from '../../support/Common/GATracing';
 import CategoryPage from '../../support/PageObject/CategoryPage';
 
-describe('Test product impression', () =>{
+describe('Test DLE3 - productClick', () =>{
     // Cypress不支持在单个测试文件中进行跨域测试，所以只能暂时关闭捕获异常
     Cypress.on('uncaught:exception', (err, runnable) => {
         // returning false here prevents Cypress from
@@ -12,11 +12,9 @@ describe('Test product impression', () =>{
         return false
     });
 
-    before(()=>{
+    beforeEach('Set cookie', ()=>{
         // 在开始前隐藏国家选取框
-        const cookie = new Cookie();
-        cookie.hideCountry();
-        cookie.isHideCountry();
+        cy.hideCountryHint();
     });
 
     // 定义测试的国家和网页

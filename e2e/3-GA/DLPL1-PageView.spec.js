@@ -3,7 +3,7 @@ import Cookie from '../../support/Common/setCookie'
 import GATracing from '../../support/Common/GATracing'
 
 let token = ''
-describe('Test page view GA tracking', ()=>{
+describe('Test DLPL1 - pageView', ()=>{
     Cypress.on('window:before:load', (win)=>{
         // 在页面loading前，创建一个对象获取window.ga元素
         win.ga = cy.stub().as('ga')
@@ -15,7 +15,7 @@ describe('Test page view GA tracking', ()=>{
         return false
     })
     
-    before(()=>{
+    beforeEach('Set cookie', ()=>{
         // 监听GA
         cy.intercept({hostname: 'www.google-analytics.com'}, {statusCode: 503})  
         // 登录
@@ -23,12 +23,11 @@ describe('Test page view GA tracking', ()=>{
         //     token = response.body.access_token  // 保存token
         // })
         // 设置cookie并判断cookie是否设置成功
-        const cookie = new Cookie();
-        cookie.hideCountry();
-        cookie.isHideCountry();
+        cy.hideCountryHint();
     })
+
     // 定义测试的国家
-    const nation = ['AU', 'SG', 'US'];
+    const nation = Cypress.env('NATION');
     // 定义测试的page
     const pageType = ['_HPG', '_CATEGORY', '_BLOG', '_TRADE']
     // 循环测试不同国家的page view

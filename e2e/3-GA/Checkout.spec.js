@@ -9,7 +9,7 @@ import ShippingMethodOperation from '../../support/Operation/ShippingMethodOpera
 import PaymentOperation from '../../support/Operation/PaymentOperation';
 import AddressBookOperation from '../../support/Operation/AddressBookOperation';
 
-describe('Test product impression', () =>{
+describe('Test checkoutFlow', () =>{
     // 通过环境变量拿到国家数组
     const nation = Cypress.env('NATION');
     let pageType;
@@ -21,11 +21,9 @@ describe('Test product impression', () =>{
         return false
     });
 
-    before(()=>{
+    beforeEach('Set cookie', ()=>{
         // 在开始前隐藏国家选取框
-        const cookie = new Cookie();
-        cookie.hideCountry();
-        cookie.isHideCountry();
+        cy.hideCountryHint();
     });
     for(let i=0; i < nation.length; i++) {
         describe(nation[i] + 'Test checkout flow', () => {
