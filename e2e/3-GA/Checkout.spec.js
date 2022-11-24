@@ -21,16 +21,18 @@ describe('Test checkoutFlow', () =>{
         return false
     });
 
-    beforeEach('Set cookie', ()=>{
-        // 在开始前隐藏国家选取框
-        cy.hideCountryHint();
-    });
+    // beforeEach('Set cookie', ()=>{
+
+    // });
     for(let i=0; i < nation.length; i++) {
-        describe(nation[i] + 'Test checkout flow', () => {
+        describe(nation[i], () => {
             // 每次测试开始前，同步登录态
             beforeEach(() => {
                 const GA = new GATracing(nation[i], '_LOGIN');
                 const login = new LoginOperation();
+                // 在开始前隐藏国家选取框
+                cy.hideCountryHint();
+
                 // session相当于保存本次登录的浏览器设置（cookie/ÍD等）
                 // 但是同一个sessionID只会运行和保存一次，‘user’为ID标识
                 cy.session(nation[i] + ' user', ()=>{
@@ -38,6 +40,7 @@ describe('Test checkoutFlow', () =>{
                         login.login();
                     });
                 })
+                // 解决US会重置shipment的问题
                 if (nation[i] == 'US') {
                     cy.clearCookie('city').then(() => {
                         cy.setCookie('city', '{"city":"Mclean","zipcode":"22102","state":"VA"}');
