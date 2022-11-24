@@ -1,0 +1,8 @@
+{
+    "STRIPE_IFRAME_PREFIX" : "__privateStripeFrame",
+    "normalCard":{
+        "cardNumber": "4111111111111111",
+        "cardExpiry": "1225",
+        "cardCvc": "123"
+    }
+}

@@ -1,0 +1,25 @@
+{
+    "query": {
+        "bool": {
+            "must": {
+                "nested": {
+                    "path": "categories",
+                    "filter": {
+                        "term": {
+                            "categories.permalink": "sofas"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "sort": [{
+        "_score": {
+            "order": "desc"
+        }
+    }, {
+        "rank": {
+            "order": "asc"
+        }
+    }]
+}
