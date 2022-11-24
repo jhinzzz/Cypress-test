@@ -8,7 +8,7 @@ class CategoryPage{
         return cy.get('[data-selenium="sort_filter"]').should('not.be.disabled');
     }
     getHighestPrice() {
-        return cy.get('a').contains('Price: High to Low');
+        return cy.get('a').contains('Price: High to Low').should('be.visible');
     }
 }
 

@@ -27,6 +27,8 @@ describe('Test DLE4 - softFilter', () =>{
             const category = new CategoryPage();
 
             GA.test_pageVisit().then(()=>{
+                // 暂时先用强制等待解决跳动问题
+                cy.wait(1000);
                 category.getDropdownFilter().click();
                 category.getHighestPrice().click();
                 GA.assertSoftFilter();
