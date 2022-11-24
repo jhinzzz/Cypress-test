@@ -21,21 +21,21 @@ describe('Test checkoutFlow', () =>{
         return false
     });
 
-    beforeEach('Set cookie', ()=>{
-        // 在开始前隐藏国家选取框
-        cy.session('hideCountry', () => {
-            cy.hideCountryHint();
-        })
+    before('Set cookie', ()=>{
+
     });
     for(let i=0; i < nation.length; i++) {
         describe(nation[i], () => {
             // 每次测试开始前，同步登录态
             beforeEach(() => {
                 const GA = new GATracing(nation[i], '_LOGIN');
-                const login = new LoginOperation();   
+                const login = new LoginOperation();
+                
                 // session相当于保存本次登录的浏览器设置（cookie/ÍD等）
                 // 但是同一个sessionID只会运行和保存一次，‘user’为ID标识
                 cy.session(nation[i] + ' user', ()=>{
+                    // 在开始前隐藏国家选取框
+                    cy.hideCountryHint();
                     GA.test_pageVisit().then(() =>{
                         login.login();
                     });
