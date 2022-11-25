@@ -28,10 +28,11 @@ describe('Test DLE4 - softFilter', () =>{
 
             GA.test_pageVisit().then(()=>{
                 // 暂时先用强制等待解决跳动问题
-                cy.wait(1000);
-                category.getDropdownFilter().click();
-                category.getHighestPrice().click();
-                GA.assertSoftFilter();
+                cy.wait(1500);
+                category.getDropdownFilter().click().then(()=>{
+                    category.getHighestPrice().click();
+                    GA.assertSoftFilter();
+                });
             });
         })
     }
