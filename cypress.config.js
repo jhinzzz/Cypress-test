@@ -1,4 +1,5 @@
-const { defineConfig } = require('cypress')
+const { defineConfig } = require('cypress');
+const allureWriter = require('@shelex/cypress-allure-plugin');
 
 module.exports = defineConfig({
   projectId: 'vs4d6v',
@@ -68,6 +69,8 @@ module.exports = defineConfig({
     // 开启cy.session()
     experimentalSessionAndOrigin: true,
     setupNodeEvents(on, config) {
+      // 通过插件生成allure报告
+      allureWriter(on,config);
       return require('./plugins/index.js')(on, config)
     },
     specPattern: './e2e/**/*.spec.js',
