@@ -1,64 +1,46 @@
-name: GTM test
+name: Test parallel GA
 
 on:
-  # push:
-  #   branches: [ master ]
-  # 定时任务
-#   schedule:
-#     - cron: '0 0 * * *'
-  # 手动触发
   workflow_dispatch:
 
+  
+
 jobs:
-  # 缓存环境
-  # Cypress-install:
-  #   runs-on: ubuntu-latest
-  #   container: cypress/browsers:node16.14.2-slim-chrome100-ff99-edge
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v3
-
-  #     - name: Cypress install
-  #       uses: cypress-io/github-action@v3.0.3
-  #       with:
-  #         runTests: false
-  #     # 保存缓存
-  #     - name: Save build folder
-  #       uses: actions/upload-artifact@v3
-  #       with:
-  #         name: build
-  #         if-no-files-found: error
-  #         path: build
-
-
-  Cypress-run:
+  GA-chrome-test:
+    # 设置过期测试过期时间
+    timeout-minutes: 10
     runs-on: ubuntu-latest
-    # cypress browser docker
-    container: cypress/browsers:node16.14.2-slim-chrome100-ff99-edge
-    # needs: Cypress-install
+    container:
+      # 安装node和浏览器
+      image: cypress/browsers:node16.16.0-chrome106-ff99-edge
+    strategy:
+      # 当一个测试用例失败时，不取消测试
+      fail-fast: false
+      matrix:
+        # 并发
+        containers: [1, 2, 3, 4, 5, 6, 7]
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      # # 下载缓存
-      # - name: Download the build folders
-      #   uses: actions/download-artifact@v3
-      #   with:
-      #     name: build
-      #     path: build
-      
-      # 运行cypress
-      - name: Cypress-run
+
+      - name: "GA Tests - Chrome"
         uses: cypress-io/github-action@v4
         with:
+          wait-on-timeout: 120
           browser: chrome
           record: true
           parallel: true
-          group: Actions test
+          group: "GA - Chrome"
           spec: e2e/3-GA/*
+          config-file: cypress.config.js
         env:
           CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          # Recommended: pass the GitHub token lets this action correctly
+          # determine the unique run id necessary to re-run the checks
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       # 发送邮件
       - name: send_email
         # 只有当上面失败时才运行发送邮件
@@ -69,10 +51,10 @@ jobs:
           server_port: 465
           username: ${{ secrets.EMAIL_ACCOUNT }}
           password: ${{ secrets.EMAIL_PASSWORD }}
-          subject: GTM errors
+          subject: GA tracking error
           to: ${{ secrets.EMAIL_RECEIVER }}
           # Required sender full name (address can be skipped):
           from: ${{ secrets.EMAIL_RECEIVER }}
           secure: true
-          body: We have some wrong orders on GTM.
+          body: GA tracking got some problems.
           priority: high
