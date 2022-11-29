@@ -1,0 +1,4 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Tue Nov 29 08:30:35 GMT 2022","Tue Nov 29 08:31:07 GMT 2022","32380","","Test DLE1 - productImpression","","","","Test AU productImpression",""
+"passed","Tue Nov 29 08:31:24 GMT 2022","Tue Nov 29 08:31:33 GMT 2022","9036","","Test DLE1 - productImpression","","","","Test US productImpression",""
+"passed","Tue Nov 29 08:31:07 GMT 2022","Tue Nov 29 08:31:24 GMT 2022","16595","","Test DLE1 - productImpression","","","","Test SG productImpression",""
