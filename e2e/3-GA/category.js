@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe('test SG category', ()=>{
+describe('Test SG category', ()=>{
 
     before('setcookie',()=>{
         // 设置cookie并判断cookie是否设置成功

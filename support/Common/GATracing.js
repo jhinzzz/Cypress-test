@@ -14,6 +14,7 @@ class GATracing {
     }
     // 封装页面访问函数
     test_pageVisit() {
+        cy.allure().step('View page');
         return cy.visit({
             url: Cypress.env(this.nation + '_HPG') + Cypress.env(this.pageType),
             auth:{
@@ -25,6 +26,7 @@ class GATracing {
     /*--------------------- 封装断言函数 ---------------------*/
     // 封装pageview断言
     assertPageView() {
+        // cy.allure().step('Assertion');
         return cy.window().then((win) =>{
             win.dataLayer.some((dl) =>{
                 // 判断是否有pageview事件被触发
@@ -68,6 +70,7 @@ class GATracing {
     };
     // 封装productImpression断言
     assertProductImpression() {
+        cy.allure().step('Get product information');
         let variant;
         // 通过cy.fixture获取requestbody  
         cy.fixture('requestSearchBody').then((data)=>{
@@ -82,6 +85,8 @@ class GATracing {
                 variant = Response.body.hits.hits[0]._source.variants[0];
             })
         });
+        
+        // cy.allure().step('Assertion');
         // 断言
         cy.window().then((win) =>{
             // 判断是否有productImpression事件被触发
@@ -102,6 +107,7 @@ class GATracing {
     }
     // 封装productClick断言
     assertProductClick() {
+        cy.allure().step('Get product information');
         let variant;
         // 通过cy.fixture获取requestbody  
         cy.fixture('requestSearchBody').then((data)=>{
@@ -117,6 +123,7 @@ class GATracing {
             })
         });
 
+        // cy.allure().step('Assertion');
         cy.window().then((win) =>{
             // 判断是否有productClick事件被触发
             this.isSendEvent(win, 'event', 'productClick')
@@ -137,6 +144,7 @@ class GATracing {
 
     // 封装SortFilter断言
     assertSoftFilter() {
+        // cy.allure().step('Assertion');
         return cy.window().then((win) =>{
             // 判断是否有TrackEvent事件被触发
             this.isSendEvent(win, 'event', 'trackEvent');
@@ -153,6 +161,7 @@ class GATracing {
 
     // 封装Checkout断言
     assertCheckout(step) {
+        // cy.allure().step('Assertion');
         cy.window().then((win) => {
             // 判断是否有Checkout事件被触发
             this.isSendEvent(win, 'event', 'checkout');
@@ -199,6 +208,7 @@ class GATracing {
 
     // 封装search address断言
     assertSearchAddress() {
+        // cy.allure().step('Assertion');
         return cy.window().then((win) =>{
             // 判断是否有TrackEvent事件被触发
             this.isSendEvent(win, 'event', 'trackEvent');
@@ -229,6 +239,7 @@ class GATracing {
 
     // 封装add address断言
     assertAddAddress() {
+        // cy.allure().step('Assertion');
         return cy.window().then((win) =>{
             // 判断是否有TrackEvent事件被触发
             this.isSendEvent(win, 'event', 'trackEvent');
@@ -259,6 +270,7 @@ class GATracing {
 
     //封装Add coupon断言
     assertAddCoupon(code='cypresstest') {
+        // cy.allure().step('Assertion');
         return cy.window().then((win) =>{
             // 判断是否有TrackEvent事件被触发
             this.isSendEvent(win, 'eventDetails.action', 'add_coupon');
@@ -286,6 +298,7 @@ class GATracing {
 
     // 封装shipping method断言
     assertShippingMethod() {
+        // cy.allure().step('Assertion');
         return cy.window().then((win) =>{
             // 判断是否有TrackEvent事件被触发
             this.isSendEvent(win, 'eventDetails.category', 'dy_event');
@@ -302,6 +315,7 @@ class GATracing {
 
     // 封装Split shipment断言
     assertSplitShipment() {
+        // cy.allure().step('Assertion');
         return cy.window().then((win) =>{
             // 判断是否有Shipment Split事件被触发
             const result = this.isSendEvent(win, 'eventDetails.label', 'Single shipment only');
@@ -317,7 +331,9 @@ class GATracing {
         })
     }
 
+    //封装Transaction断言
     assertTransaction() {
+        // cy.allure().step('Assertion');
         return cy.window().then((win) =>{
             // 判断是否有 Transaction 事件被触发
             const result = this.isSendEvent(win, 'event', 'transaction');

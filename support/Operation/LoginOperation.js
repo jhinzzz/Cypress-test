@@ -5,6 +5,8 @@ class LoginOperation {
         this.LOGIN = new LoginPage();
     }
     login(){
+        cy.allure().step('Login');
+        
         this.LOGIN.inputEmail();
         this.LOGIN.inputPassword();
         this.LOGIN.clickLogin();

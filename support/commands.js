@@ -41,6 +41,7 @@ Cypress.Commands.add('checkElementExists', (selector) => {
 })
 
 Cypress.Commands.add('hideCountryHint', () => {
+  //cy.allure().step('Set up country hint');
   cy.setCookie('select_country_hint_hidden', 'true');
   cy.getCookie('select_country_hint_hidden').should('have.property','value', 'true');
 })

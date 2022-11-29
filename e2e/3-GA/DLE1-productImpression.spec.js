@@ -13,7 +13,6 @@ describe('Test DLE1 - productImpression', () =>{
 
     beforeEach('Set cookie', ()=>{
         // 在开始前隐藏国家选取框
-        cy.allure().step('Set up country hint');
         cy.hideCountryHint();
     });
 
@@ -22,11 +21,9 @@ describe('Test DLE1 - productImpression', () =>{
     const pageType = '_CATEGORY'
     // 循环测试不同国家的productImpression
     for (let n = 0; n < nation.length; n++) {
+
         it('Test ' + nation[n] + ' productImpression', () =>{
-            cy.allure().step('ProductImpression');
-
             const GA = new GATracing(nation[n], pageType);
-
             GA.test_pageVisit().then(()=>{
                 // 向下滚动以保证product会出现
                 cy.scrollTo(0,100);

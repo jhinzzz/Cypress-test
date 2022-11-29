@@ -9,7 +9,7 @@ import Cookie from '../../support/Common/setCookie'
 /*---------------------------前置数据定义---------------------------*/
 let GA;
 
-describe("test PDP GTM", () => {
+describe("Test PDP GTM", () => {
   /*---------------------------前置数据设置---------------------------*/
   before("product information prepare", () => {
     // 设置cookie并判断cookie是否设置成功
@@ -57,7 +57,7 @@ describe("test PDP GTM", () => {
   });
 
   /*---------------------------测试主体---------------------------*/
-  it("trigger AU configurable", () => {
+  it("Trigger AU configurable", () => {
     const PDP = new ProductDetailPage();
     cy.visit(Cypress.env("AU_HPG") + Cypress.env("AU_CON")).then(() =>{
     /*---------------------------------------------触发GTM---------------------------------------------*/

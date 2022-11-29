@@ -9,6 +9,8 @@ class AddressOperation{
     }
     // 创建地址
     createAddress() {
+        cy.allure().step('Create address');
+
         this.address.isAddressPage();
         // 输入字符并选中一个联想的地址
         this.address.inputSearchDropdown().then(() => {
@@ -37,12 +39,16 @@ class AddressOperation{
         }
     }
     testCoupon() {
+        cy.allure().step('Test Coupon');
+
         this.address.getContinue().then(() => {
             this.address.inputCoupon();
             this.address.deleteCoupon();
         })
     }
     assertAddress() {
+        cy.allure().step('Assertion');
+
         // 等到Continue按钮加载后再进行断言
         this.address.getContinue().then(() => {
             this.GA.assertCheckout('2');
@@ -53,6 +59,8 @@ class AddressOperation{
     }
     // 下一步
     nextStep() {
+        cy.allure().step('Click continue');
+
         this.address.clickContinue();
         cy.get('[data-selenium="checkout-shipping-method"]').should('not.be.disabled');
     }

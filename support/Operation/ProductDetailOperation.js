@@ -10,6 +10,8 @@ class ProductDetailOperation{
     }
 
     checkoutFlow(pageType) {
+        cy.allure().step('Test Coupon');
+
             this.product.getATC().click().then(() => {
                 this.product.getCheckout().click();
                 this.GA.assertCheckout('1');
@@ -17,6 +19,8 @@ class ProductDetailOperation{
     }
 
     RemoveCart() {
+        cy.allure().step('Remove cart');
+
         this.product.getCart().click().then(() => {
             this.product.getRemove().click();
         })
