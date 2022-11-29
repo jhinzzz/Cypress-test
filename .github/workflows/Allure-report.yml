@@ -6,7 +6,7 @@ jobs:
     generate-report:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v3
             - name: Download Cypress
               uses: bahmutov/npm-install@v1
               env:
@@ -33,13 +33,12 @@ jobs:
 
             - name: Run Cypress
               continue-on-error: true
-              # run: npm run DEBUG=allure-plugin* npx cypress run --config specPattern=cypress/e2e/3-GA/DLE1-productImpression.spec.js --env allure=true --browser chrome
-              run: npx cypress run --spec "e2e/3-GA/DLE1-productImpression.spec.js" --env allure=true --browser chrome
+              run: npx cypress run --spec "e2e/3-GA/*.spec.js" --env allure=true --browser chrome
               # env:
               #     CYPRESS_SPLIT_SPEC_API_KEY: '${{ secrets.SPLIT_SPEC_API_KEY }}'
 
             - name: Get Allure history
-              uses: actions/checkout@v2
+              uses: actions/checkout@v3
               if: always()
               continue-on-error: true
               with:
