@@ -3,7 +3,8 @@
     "@shelex/cypress-allure-plugin": "^2.31.0",
     "cypress": "^11.0.1",
     "cypress-iframe": "^1.0.1",
-    "cypress-wait-until": "^1.7.2"
+    "cypress-wait-until": "^1.7.2",
+    "typescript": "^4.9.3"
   },
   "dependencies": {
     "mockjs": "^1.1.0"

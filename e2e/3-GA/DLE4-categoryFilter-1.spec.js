@@ -1,4 +1,4 @@
-/// <reference types="cypress" />
+
 
 import Cookie from '../../support/Common/setCookie';
 import GATracing from '../../support/Common/GATracing';
