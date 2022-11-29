@@ -16,6 +16,7 @@ jobs:
               run: |
                   npx cypress cache path
                   npx cypress cache list
+
             - name: restore / cache the binary
               id: cache-cypress
               uses: actions/cache@v1
@@ -24,15 +25,18 @@ jobs:
                   key: >-
                       cypress-cache-v2-${{ runner.os }}-${{ hashFiles('**/package.json')
                       }}
+
             - name: Install Cypress
               run: |
                   npx cypress install
                   npx cypress cache list
+
             - name: Run Cypress
               continue-on-error: true
-              run: npm run cypress:open --browser chrome
-              env:
-                  CYPRESS_SPLIT_SPEC_API_KEY: '${{ secrets.SPLIT_SPEC_API_KEY }}'
+              # run: npm run DEBUG=allure-plugin* npx cypress run --config specPattern=cypress/e2e/3-GA/DLE1-productImpression.spec.js --env allure=true --browser chrome
+              run: npx cypress run --spec "cypress/e2e/3-GA/DLE1-productImpression.spec.js" --env allure=true --browser chrome
+              # env:
+              #     CYPRESS_SPLIT_SPEC_API_KEY: '${{ secrets.SPLIT_SPEC_API_KEY }}'
 
             - name: Get Allure history
               uses: actions/checkout@v2
