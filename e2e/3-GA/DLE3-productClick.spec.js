@@ -23,6 +23,8 @@ describe('Test DLE3 - productClick', () =>{
     // 循环测试不同国家的productClick
     for (let n = 0; n < nation.length; n++) {
         it('Test ' + nation[n] + ' productClick', () =>{
+            cy.allure().step('attachment should be inside this step');
+            
             const GA = new GATracing(nation[n], pageType);
             const category = new CategoryPage();
 

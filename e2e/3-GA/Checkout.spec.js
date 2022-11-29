@@ -33,6 +33,7 @@ describe('Test checkoutFlow', () =>{
                 
                 // session相当于保存本次登录的浏览器设置（cookie/ÍD等）
                 // 但是同一个sessionID只会运行和保存一次，‘user’为ID标识
+                cy.allure().step('Set up nation hint');
                 cy.session(nation[i] + ' user', ()=>{
                     // 在开始前隐藏国家选取框
                     cy.hideCountryHint();
@@ -41,6 +42,7 @@ describe('Test checkoutFlow', () =>{
                     });
                 })
                 // 解决US会重置shipment的问题
+                cy.allure().step('Set up US zip code');
                 if (nation[i] == 'US') {
                     cy.clearCookie('city').then(() => {
                         cy.setCookie('city', '{"city":"Mclean","zipcode":"22102","state":"VA"}');
@@ -50,6 +52,8 @@ describe('Test checkoutFlow', () =>{
             })
             // 添加购物车
             it( nation[i] + ' Add product to cart', () =>{
+                cy.allure().step('Test add to cart');
+
                 pageType = nation[i] + '_SIM';
                 const GA = new GATracing(nation[i], pageType);
                 const pdp = new ProductDetailOperation(nation[i], pageType);
@@ -60,6 +64,8 @@ describe('Test checkoutFlow', () =>{
 
             // 测试Address page
             it(nation[i] + ' Test Address page', () =>{
+                cy.allure().step('Test address page');
+
                 pageType = '_ADDRESS';
                 const GA = new GATracing(nation[i], pageType);
                 const address = new AddressOperation(nation[i]);
@@ -74,6 +80,8 @@ describe('Test checkoutFlow', () =>{
     
             // 测试Shipping Method page
             it(nation[i] + ' Test Shipping Method page', () =>{
+                cy.allure().step('Test shipping method page');
+
                 pageType = '_METHOD';
                 const GA = new GATracing(nation[i], pageType);
                 const method = new ShippingMethodOperation(nation[i]);
@@ -87,6 +95,8 @@ describe('Test checkoutFlow', () =>{
     
             // 测试Payment & Success page
             it(nation[i] + ' Test Payment page', () =>{
+                cy.allure().step('Test payment page');
+
                 pageType = '_PAYMENT';
                 const GA = new GATracing(nation[i], pageType);
                 const payment = new PaymentOperation(nation[i]);
@@ -102,6 +112,8 @@ describe('Test checkoutFlow', () =>{
             
             // 结尾
             it(nation[i] + ' Delete address & cart', () => {
+                cy.allure().step('Delete address & cart');
+
                 pageType = '_ADDRESSBOOK';
                 const GA = new GATracing(nation[i], pageType);
                 const book = new AddressBookOperation(nation[i], pageType);
