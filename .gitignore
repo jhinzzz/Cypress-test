@@ -3,3 +3,4 @@
 *.png
 screenshots/**
 videos/**
+node_modules

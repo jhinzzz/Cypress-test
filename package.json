@@ -1,9 +1,9 @@
 {
   "devDependencies": {
+    "@shelex/cypress-allure-plugin": "^2.31.0",
     "cypress": "^11.0.1",
     "cypress-iframe": "^1.0.1",
-    "cypress-wait-until": "^1.7.2",
-    "@shelex/cypress-allure-plugin": "2.31.0"
+    "cypress-wait-until": "^1.7.2"
   },
   "dependencies": {
     "mockjs": "^1.1.0"
