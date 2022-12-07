@@ -35,7 +35,7 @@ describe('Test DLPL1 - pageView', ()=>{
     for (let n = 0; n < nation.length; n++) {
         for (let p = 0; p < pageType.length; p++) {
             it('Test ' + nation[n] + '' + pageType[p], () =>{
-            cy.allure().story(nation[n] + pageType[i]);
+            cy.allure().story(nation[n] + pageType[n]);
 
             const GA = new GATracing(nation[n], pageType[p]);
 
