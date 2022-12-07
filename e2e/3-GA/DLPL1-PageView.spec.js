@@ -16,6 +16,7 @@ describe('Test DLPL1 - pageView', ()=>{
     })
     
     beforeEach('Set cookie', ()=>{
+        cy.allure().epic('Test DLPL1 - pageView');
         // 监听GA
         cy.intercept({hostname: 'www.google-analytics.com'}, {statusCode: 503})  
         // 登录
@@ -34,7 +35,7 @@ describe('Test DLPL1 - pageView', ()=>{
     for (let n = 0; n < nation.length; n++) {
         for (let p = 0; p < pageType.length; p++) {
             it('Test ' + nation[n] + '' + pageType[p], () =>{
-            cy.allure().step('Page view');
+            cy.allure().story(nation[n] + pageType[i]);
 
             const GA = new GATracing(nation[n], pageType[p]);
 

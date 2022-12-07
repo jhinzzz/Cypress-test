@@ -12,6 +12,8 @@ describe("Test PDP GTM", () => {
 
   /*---------------------------前置数据设置---------------------------*/
   before("product information prepare", () => {
+    // cy.allure().epic('Test AU bundle PDP GA');
+
     // 设置cookie并判断cookie是否设置成功
     const cookie = new Cookie();
     cookie.hideCountry();
@@ -21,6 +23,7 @@ describe("Test PDP GTM", () => {
       GA = data;
     });
 
+    // cy.allure().step('Get product information from API');
     cy
       .request("GET", Cypress.env("AU_API") + "/v3" + Cypress.env("AU_BUN"))
       .then((response) => 
@@ -61,7 +64,7 @@ describe("Test PDP GTM", () => {
   
   /*---------------------------测试主体---------------------------*/
   it("Test AU bundle", () => {
-
+    // // cy.allure().feature('Trigger GA');
     /*---------------------------------------------触发GTM---------------------------------------------*/
     const PDP = new ProductDetailPage();
     cy.visit(Cypress.env("AU_HPG") + Cypress.env("AU_BUN")).then(() =>{
@@ -105,6 +108,7 @@ describe("Test PDP GTM", () => {
     });
   // })
   // it('Assert AU Bundle', ()=>{
+    // cy.allure().feature('Assert GA');
     /*---------------------------------------------断言状态---------------------------------------------*/
     cy.window().then((win) => {
       win.dataLayer.some((dl) => {
@@ -133,11 +137,13 @@ describe("Test PDP GTM", () => {
         // ) {
         //   GA.dyNaviResult = true;
         // }
+        
         //测试pdp_image
         if (
           dl.event === "trackEvent" &&
           dl["eventDetails.category"] === "pdp_image"
           ) {
+            // cy.allure().step('Assert pdp_image');
             expect(dl["eventDetails.label"], '3.Test PDP image').to.equal(GA.productPictureType)
             // 无法解决无法获取数据的问题，暂时先注释。
             // expect(dl["eventDetails.sku_id", '3.Test PDP image']).to.equal(GA.productSKU)
@@ -147,101 +153,127 @@ describe("Test PDP GTM", () => {
           dl.event === "trackEvent" &&
           dl["eventDetails.action"] === "Wish-list"
         ) {
+          // cy.allure().step('Assert wish_list');
           expect(dl["eventDetails.label"], '4.Test wishlist').to.equal(GA.productLabel)
         }
+
         //测试add_to_cart
         if (dl.event === "addToCart") {
           dl.ecommerce.add.products.some((sku) => {
+            // cy.allure().step('Assert add_to_cart');
             expect(sku.id, '5. Test ATC').to.equal(GA.productSKU)
           });
         }
+
         //测试cart_PageView
         if (dl.event === "pageview" && dl.pageCat === "cart") {
+          // cy.allure().step('Assert cart_PageView');
           expect(dl.pageCat, '6. Test cart page view').to.have.string('cart')
         }
+
         //测试remove_cart
         if (dl.event === "removeFromCart") {
           dl.ecommerce.remove.products.some((sku) => {
+            // cy.allure().step('Assert remove_cart');
             expect(sku.id, "7. Test remove cart").to.equal(GA.productSKU)
             // if (sku.id === GA.productSKU) {
             //   GA.removeCartResult = true;
             // }
           });
         }
+
         //测试options_change
         if (
           dl["eventDetails.action"] === GA.oduct_opt_name &&
           dl["eventDetails.label"] === GA.roduct_length
         ) {
+          // cy.allure().step('Assert options_change');
           expect(dl["eventDetails.sku_id"], '8. Test options change').to.equal(GA.product_sku)
         }
+
         //测试x_reviews
+        // cy.allure().step('Assert x_reviews');
         if (
           dl["eventDetails.action"] === "x_reviews"
         ) {
           expect(dl["eventDetails.label"], '9. Test x reviews click').to.equal("click")
           //GA.xReviewsResult = true;
         }
+
         //测试review_dropdown
+        // cy.allure().step('Assert review_dropdown');
         if (dl["eventDetails.action"] === "review_dropdown") {
           expect(dl["eventDetails.label"], '10. Test most recent reviews').to.equal("Most Recent")
           // GA.reviewsDrowdownResult = true;
         }
+
         //测试PDP_property
         if (dl["eventDetails.action"] === "product_property") 
         {
+          // cy.allure().step('Assert PDP_property');
           expect(dl["eventDetails.label"], '11. Test product property').to.equal(GA.productDetailLabel)
           //GA.pdpPropertyResult = true;
         }
+
         //测试installment
         if (
           dl["eventDetails.action"] === "bnpl" &&
           dl["eventDetails.label"] === "expand"
-        ) {
+        ) {        // cy.allure().step('Assert installment expand');
           expect(dl["eventDetails.sku_id"], '12. Test detail expand').to.equal(GA.productSKU);
         }
         if (
           dl["eventDetails.action"] === "bnpl" &&
           dl["eventDetails.label"] === "close"
         ) {
+          // cy.allure().step('Assert installment close');
           expect(dl["eventDetails.sku_id"], '13 Test detail expand').to.equal(GA.productSKU);
         }
+
         //测试PDP_details_details
         if (
           dl["eventDetails.action"] === "details" &&
           dl["eventDetails.label"] === 'expand') {
+          // cy.allure().step('Assert PDP_details_details expand');
           expect(dl["eventDetails.sku_id"], '14. Test detail expand').to.equal(GA.productSKU);
           // GA.detailsExpandResult = true;
         }
         if (
           dl["eventDetails.action"] === "details" &&
           dl["eventDetails.label"] === 'close') {
+          // cy.allure().step('Assert PDP_details_details close');
           expect(dl["eventDetails.sku_id"], '15. Test detail expand').to.equal(GA.productSKU);
           // GA.detailsExpandResult = true;
         }
+
         //测试PDP_details_dimensions
         if (
           dl["eventDetails.action"] === "dimensions" &&
           dl["eventDetails.label"] === 'expand') {
+            // cy.allure().step('Assert PDP_details_dimensions expand');
           expect(dl["eventDetails.sku_id"], '16. Test dimensions expand').to.equal(GA.productSKU);
           // GA.dimensionsExpandResult = true;
         }
         if (
           dl["eventDetails.action"] === "dimensions" &&
           dl["eventDetails.label"] === 'close') {
+          // cy.allure().step('Assert PDP_details_dimensions close');
           expect(dl["eventDetails.sku_id"], '17. Test dimensions expand').to.equal(GA.productSKU);
           // GA.dimensionsCloseResult = true;
         }
+
         //测试PDP_details_delivey
         if (
           dl["eventDetails.action"] === "delivery" &&
-          dl["eventDetails.label"] === 'close') {
+          dl["eventDetails.label"] === 'expand') {
+            // cy.allure().step('Assert PDP_details_delivey expand');
             expect(dl["eventDetails.sku_id"], '18. Test delivery expand').to.equal(GA.productSKU);
             // GA.deliveryExpandResult = true;
         }
         if (
           dl["eventDetails.action"] === "delivery" &&
           dl["eventDetails.label"] === 'close') {
+            // cy.allure().step('Assert PDP_details_delivey close');
             expect(dl["eventDetails.sku_id"], '19. Test delivery expand').to.equal(GA.productSKU);
             // GA.deliveryCloseResult = true;
         }

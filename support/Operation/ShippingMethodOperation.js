@@ -10,15 +10,19 @@ class ShippingMethodOperation{
     isShippingMethod() {
         this.method.getContinue();
     }
-    testCoupon() {
-        cy.allure().step('Test Coupon');
 
+    testCoupon() {
+        // cy.allure().story('Test Coupon');
+
+        cy.allure().step('Input coupon');
         this.method.inputCoupon();
+
+        cy.allure().step('Delete coupon');
         this.method.deleteCoupon();
     }
     // 断言
     assertMethod(){
-        cy.allure().step('Assertion');
+        // cy.allure().story('Assertion');
         
         return this.method.getContinue().then(() => {
             cy.url().should('contain', 'shipping-method');

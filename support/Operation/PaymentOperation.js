@@ -10,28 +10,36 @@ class PaymentOperation {
     }
     
     isPaymentPage() {
+        cy.allure().step('Assert url');
         this.payment.getContinue();
     }
 
     chooseCard() {
-        cy.allure().step('Choose card pay');
+        // cy.allure().story('Choose card pay');
 
         return this.payment.getContinue().then(() => {
             cy.url().should('contain', 'payment');
+
+            cy.allure().step('Input card');
             this.payment.inputCreditCard();
+
+            cy.allure().step('Select terms');
             this.payment.clickTerms();
         })
     }
 
     testCoupon() {
-        cy.allure().step('Test Coupon');
+        // cy.allure().story('Test Coupon');
 
+        cy.allure().step('Input coupon');
         this.payment.inputCoupon();
+
+        cy.allure().step('Delete coupon');
         this.payment.deleteCoupon();
     }
 
     assertPayment() {
-        cy.allure().step('Assertion');
+        // cy.allure().story('Assertion');
 
         this.GA.assertCheckout('4');
         this.GA.assertAddCoupon();

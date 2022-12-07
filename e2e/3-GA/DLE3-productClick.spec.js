@@ -13,6 +13,7 @@ describe('Test DLE3 - productClick', () =>{
     });
 
     beforeEach('Set cookie', ()=>{
+        cy.allure().epic('Test DLE3 - productClick');
         // 在开始前隐藏国家选取框
         cy.hideCountryHint();
     });
@@ -23,7 +24,7 @@ describe('Test DLE3 - productClick', () =>{
     // 循环测试不同国家的productClick
     for (let n = 0; n < nation.length; n++) {
         it('Test ' + nation[n] + ' productClick', () =>{
-            cy.allure().step('attachment should be inside this step');
+            cy.allure().story(nation[n]);
             
             const GA = new GATracing(nation[n], pageType);
             const category = new CategoryPage();

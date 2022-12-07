@@ -12,6 +12,7 @@ import AddressBookOperation from '../../support/Operation/AddressBookOperation';
 describe('Test checkoutFlow', () =>{
     // 通过环境变量拿到国家数组
     const nation = Cypress.env('NATION');
+    // const nation = ['AU'];
     let pageType;
 
     // Cypress不支持在单个测试文件中进行跨域测试，所以只能暂时关闭捕获异常
@@ -30,21 +31,30 @@ describe('Test checkoutFlow', () =>{
             beforeEach(() => {
                 const GA = new GATracing(nation[i], '_LOGIN');
                 const login = new LoginOperation();
+
+                cy.allure().epic(nation[i] + ' GA checkout tracking');
                 
                 // session相当于保存本次登录的浏览器设置（cookie/ÍD等）
                 // 但是同一个sessionID只会运行和保存一次，‘user’为ID标识
-                cy.allure().step('Set up nation hint');
                 cy.session(nation[i] + ' user', ()=>{
+                    // cy.allure().story(nation[i] + ' Set up nation hint');
                     // 在开始前隐藏国家选取框
+                    // cy.allure().feature('Login & Setup cookie');
+
+                    cy.allure().step('Hide country hint');
                     cy.hideCountryHint();
+
                     GA.test_pageVisit().then(() =>{
+                        cy.allure().step('Login and save');
                         login.login();
                     });
                 })
                 // 解决US会重置shipment的问题
-                cy.allure().step('Set up US zip code');
                 if (nation[i] == 'US') {
+                    // cy.allure().story(nation[i] + ' Set up US zip code');
+
                     cy.clearCookie('city').then(() => {
+                        cy.allure().step('US setup city cookie');
                         cy.setCookie('city', '{"city":"Mclean","zipcode":"22102","state":"VA"}');
                     });
                     
@@ -52,7 +62,7 @@ describe('Test checkoutFlow', () =>{
             })
             // 添加购物车
             it( nation[i] + ' Add product to cart', () =>{
-                cy.allure().step('Test add to cart');
+                cy.allure().feature(nation[i] + ' Test product detail page');
 
                 pageType = nation[i] + '_SIM';
                 const GA = new GATracing(nation[i], pageType);
@@ -64,7 +74,7 @@ describe('Test checkoutFlow', () =>{
 
             // 测试Address page
             it(nation[i] + ' Test Address page', () =>{
-                cy.allure().step('Test address page');
+                cy.allure().feature('Test address page');
 
                 pageType = '_ADDRESS';
                 const GA = new GATracing(nation[i], pageType);
@@ -80,7 +90,7 @@ describe('Test checkoutFlow', () =>{
     
             // 测试Shipping Method page
             it(nation[i] + ' Test Shipping Method page', () =>{
-                cy.allure().step('Test shipping method page');
+                cy.allure().feature('Test shipping method page');
 
                 pageType = '_METHOD';
                 const GA = new GATracing(nation[i], pageType);
@@ -95,7 +105,7 @@ describe('Test checkoutFlow', () =>{
     
             // 测试Payment & Success page
             it(nation[i] + ' Test Payment page', () =>{
-                cy.allure().step('Test payment page');
+                cy.allure().feature('Test payment page');
 
                 pageType = '_PAYMENT';
                 const GA = new GATracing(nation[i], pageType);
@@ -112,7 +122,7 @@ describe('Test checkoutFlow', () =>{
             
             // 结尾
             it(nation[i] + ' Delete address & cart', () => {
-                cy.allure().step('Delete address & cart');
+                cy.allure().feature('Delete address & cart');
 
                 pageType = '_ADDRESSBOOK';
                 const GA = new GATracing(nation[i], pageType);
