@@ -61,3 +61,12 @@ jobs:
                   github_token: ${{ secrets.GITHUB_TOKEN }}
                   publish_branch: gh-pages
                   publish_dir: allure-history
+
+            - name: Notify dedicated teams channel
+              uses: jdcargile/ms-teams-notification@v1.3
+              with:
+                github-token: ${{ github.token }} 
+                ms-teams-webhook-uri: ${{ TEAMS_WEBHOOK_TEST }}
+                notification-summary: https://jhinzzz.github.io/Cypress-test/
+                notification-color: 17a2b8
+                timezone: Asia/Shanghai
