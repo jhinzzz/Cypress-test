@@ -71,6 +71,6 @@ jobs:
               with:
                 github-token: ${{ secrets.GITHUB_TOKEN }} 
                 ms-teams-webhook-uri: ${{ secrets.TEAMS_WEBHOOK_URL }}
-                notification-summary: https://jhinzzz.github.io/Cypress-test/
+                notification-summary: "https://jhinzzz.github.io/Cypress-test/"
                 notification-color: 17a2b8
                 timezone: Asia/Shanghai
