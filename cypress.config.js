@@ -62,6 +62,7 @@ module.exports = defineConfig({
   defaultCommandTimeout: 15000,
   chromeWebSecurity: false,
   fixturesFolder: './fixtures',
+ // trashAssetsBeforeRuns: false,  //禁用自动清除之前保存的截图，截图和录屏保存在 /cypress/路径下
 
   e2e: {
     // We've imported your old cypress plugins here.
