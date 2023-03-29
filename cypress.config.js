@@ -1,11 +1,11 @@
 const { defineConfig } = require('cypress');
-const allureWriter = require('@shelex/cypress-allure-plugin');
+const allureWriter = require('@shelex/cypress-allure-plugin/writer');
 
 module.exports = defineConfig({
   projectId: 'vs4d6v',
   env: {
     allure:true,
-    
+
     SG_TEST: 'https://www-test.castlery.com/sg',
     AU_TEST: 'https://www-test.castlery.com/au',
     US_TEST: 'https://www-test.castlery.com/us',
@@ -73,7 +73,8 @@ module.exports = defineConfig({
     setupNodeEvents(on, config) {
       // 通过插件生成allure报告
       allureWriter(on,config);
-      return require('./plugins/index.js')(on, config)
+      return config
+      // return require('./plugins/index.js')(on, config)
     },
     specPattern: './e2e/**/*.spec.js',
     supportFile: './support/e2e.js',

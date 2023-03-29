@@ -1,7 +1,7 @@
 {
   "devDependencies": {
     "@shelex/cypress-allure-plugin": "^2.34.0",
-    "cypress": "^12.5.1",
+    "cypress": "^12.9.0",
     "cypress-iframe": "^1.0.1",
     "cypress-msteams-reporter": "^1.0.4",
     "cypress-wait-until": "^1.7.2"

@@ -3,3 +3,4 @@
 *.png
 screenshots/**
 videos/**
+allure-report/**
