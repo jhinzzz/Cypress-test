@@ -1,43 +1,15 @@
 {
   "devDependencies": {
-    "cypress": "^11.0.1",
+    "@shelex/cypress-allure-plugin": "^2.34.0",
+    "cypress": "^12.5.1",
     "cypress-iframe": "^1.0.1",
-    "cypress-wait-until": "^1.7.2",
-    "@shelex/cypress-allure-plugin": "2.31.0"
+    "cypress-msteams-reporter": "^1.0.4",
+    "cypress-wait-until": "^1.7.2"
   },
   "dependencies": {
     "mockjs": "^1.1.0"
   },
   "scripts": {
-    "cypress:open": "cypress open",
-    "types": "tsc --noEmit",
-    "lint": "eslint && prettier --check \"**/**.{ts,js,tsx}\" \"*.{json,md,yml}\"",
-    "start": "cross-env NODE_ENV=development concurrently yarn:start:react yarn:start:api",
-    "start:ci": "cross-env NODE_ENV=test concurrently yarn:start:react:proxy-server yarn:start:api",
-    "test:api": "yarn cypress:run --spec 'cypress/tests/api/*'",
-    "test:unit": "react-scripts test --runInBand",
-    "test:unit:ci": "react-scripts test --watchAll false --ci --runInBand",
-    "build": "react-scripts build",
-    "build:ci": "react-scripts build",
-    "allure:report": "allure generate allure-results --clean -o allure-report",
-    "allure:clear": "rm -r allure-results/ allure-report cypress/screenshots || true",
-    "allure:history": "mv -f allure-report/history allure-results/history && rm -r allure-report || true"
-  },
-  "license": "ISC",
-  "name": "cypress",
-  "description": "cypress-test",
-  "version": "1.0.0",
-  "main": "cypress.config.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jhinzzz/Cypress-test.git"
-  },
-  "keywords": [
-    "cypress"
-  ],
-  "author": "evan.fang",
-  "bugs": {
-    "url": "https://github.com/jhinzzz/Cypress-test/issues"
-  },
-  "homepage": "https://github.com/jhinzzz/Cypress-test#readme"
+    "cypress:open": "cypress open"
+  }
 }
