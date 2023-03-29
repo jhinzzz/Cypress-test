@@ -4,6 +4,8 @@ const allureWriter = require('@shelex/cypress-allure-plugin');
 module.exports = defineConfig({
   projectId: 'vs4d6v',
   env: {
+    allure:true,
+    
     SG_TEST: 'https://www-test.castlery.com/sg',
     AU_TEST: 'https://www-test.castlery.com/au',
     US_TEST: 'https://www-test.castlery.com/us',
