@@ -16,6 +16,8 @@ jobs:
                 
             - name: Download Cypress
               uses: bahmutov/npm-install@v1
+              with: 
+                  install-command: npm i --force
               env:
                   CYPRESS_INSTALL_BINARY: 0
 
@@ -23,6 +25,7 @@ jobs:
               run: |
                   npx cypress cache path
                   npx cypress cache list
+                  
             - name: restore / cache the binary
               id: cache-cypress
               uses: actions/cache@v3
@@ -31,10 +34,12 @@ jobs:
                   key: >-
                       cypress-cache-v2-${{ runner.os }}-${{ hashFiles('**/package.json')
                       }}
+                      
             - name: Install Cypress
               run: |
                   npx cypress install
                   npx cypress cache list
+                  
             - name: Run Cypress
               continue-on-error: true
               run: npx cypress run --spec "e2e/3-GA/*.spec.js" --env allure=true --browser chrome
