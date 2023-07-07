@@ -9,7 +9,7 @@ import Cookie from '../../support/Common/setCookie'
 /*---------------------------前置数据定义---------------------------*/
 let GA;
 
-describe("test PDP GTM", () => {
+describe("Test PDP GTM", () => {
 
   /*---------------------------前置数据设置---------------------------*/
   before("product information prepare", () => {

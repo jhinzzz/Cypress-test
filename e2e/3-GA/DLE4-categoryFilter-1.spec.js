@@ -1,4 +1,4 @@
-/// <reference types="cypress" />
+
 
 import Cookie from '../../support/Common/setCookie';
 import GATracing from '../../support/Common/GATracing';
@@ -13,6 +13,7 @@ describe('Test DLE4 - softFilter', () =>{
     });
 
     beforeEach('Set cookie', ()=>{
+        cy.allure().epic('Test DLE4 - softFilter');
         // 在开始前隐藏国家选取框
         cy.hideCountryHint();
     });
@@ -23,6 +24,7 @@ describe('Test DLE4 - softFilter', () =>{
     // 循环测试不同国家的productClick
     for (let n = 0; n < nation.length; n++) {
         it(nation[n] + ' Test soft filter', () =>{
+            cy.allure().story(nation[n])
             const GA = new GATracing(nation[n], pageType);
             const category = new CategoryPage();
 

@@ -9,12 +9,19 @@ class AddressOperation{
     }
     // 创建地址
     createAddress() {
+        // cy.allure().story('Create address');
+
+        cy.allure().step('Assert url')
         this.address.isAddressPage();
+
         // 输入字符并选中一个联想的地址
+        cy.allure().step('Input search detail');
         this.address.inputSearchDropdown().then(() => {
             cy.wait(1500)
+            cy.allure().step('Select first child');
             this.address.selectFirstChild();
         });
+        cy.allure().step('Input address detail');
         //内容填写
         if (this.nation == 'AU') {
             this.address.inputPhone('61266668888');
@@ -37,12 +44,19 @@ class AddressOperation{
         }
     }
     testCoupon() {
+        // cy.allure().story('Test Coupon');
+
         this.address.getContinue().then(() => {
+            cy.allure().step('Input coupon');
             this.address.inputCoupon();
+
+            cy.allure().step('Delete coupon');
             this.address.deleteCoupon();
         })
     }
     assertAddress() {
+        // cy.allure().story('Assertion');
+
         // 等到Continue按钮加载后再进行断言
         this.address.getContinue().then(() => {
             this.GA.assertCheckout('2');
@@ -53,6 +67,8 @@ class AddressOperation{
     }
     // 下一步
     nextStep() {
+        cy.allure().step('Click continue');
+
         this.address.clickContinue();
         cy.get('[data-selenium="checkout-shipping-method"]').should('not.be.disabled');
     }

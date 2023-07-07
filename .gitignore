@@ -4,3 +4,4 @@
 screenshots/**
 videos/**
 allure-report/**
+node_modules

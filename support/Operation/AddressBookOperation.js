@@ -7,6 +7,8 @@ class AddressBookOperation extends ProductDetailOperation{
         this.book = new AddressBookPage();
     }
     deleteAddress() {
+        cy.allure().step('Delete address');
+        
         this.book.getDeleteAddress().click().then(() => {
             this.book.getConfirm().click();
         });

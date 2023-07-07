@@ -7,14 +7,17 @@ describe('Test SG category', ()=>{
         cy.setCookie('select_country_hint_hidden', 'true')
         cy.getCookie('select_country_hint_hidden').should('have.property','value', 'true')
     })
-    it('test catgory', ()=>{
+    it.only('test catgory', ()=>{
         cy.visit('https://www.castlery.com/sg/?&dyApiPreview=64279e3c7151aa8f796aad476b6a5c08')
-
-        cy.get('a[data-label="Living Room"]').contains('Living Room').click()  // 触发link_click
-        cy.get('div.text').contains('All Living Room').click({force:true})  // 触发category_filter
-        cy.get('span').contains('Recommendation').click()
-        cy.get('a').contains('Fast Dispatch').click()  // 触发sort_filter
-
+     //   cy.get('a[data-label="Shop The Look"]').contains('Shop The Look').click()  // 触发link_click
+        cy.get('a[data-label="Living Room Sets"]').contains('Living Room').click({force:true})  // 触发link_click
+        cy.get('div.text').contains('Clearance').click({force:true})  // 触发category_filter
+        cy.get('a').contains('Recommendation').click({force:true})  //触发Recommendation下拉框
+        cy.get('a').contains('Fast Dispatch').click({force:true})  // 触发sort_filter
+        cy.get('a').contains('Price: Low to High').click({force:true})
+    }) 
+    
+    it('test catgory', ()=>{
         cy.window().then((win)=>{
             //  测试link_click
             const link_click_res = win.dataLayer.some((dl)=>{
